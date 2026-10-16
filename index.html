@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BCIS 1305 Midterm Review</title>
+<meta name="description" content="Practice questions for the BCIS 1305 midterm with an explanation for every answer choice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#5A6672; --rule:#D3DAE1; --soft:#E7EBEF;
+  --action:#1F4E79; --action-ink:#FFFFFF;
+  --ok:#2E7D4F; --ok-bg:#E5F2EA; --bad:#B3392F; --bad-bg:#F8E6E4;
+  --warn-bg:#FBF0D9; --warn-ink:#7A4F00;
+  --dW:#2B579A; --dP:#B8421F; --dG:#1F7A52;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#12181E; --surface:#1A222A; --ink:#E6EBF0; --muted:#9AA6B2; --rule:#2D3843; --soft:#222C36;
+  --action:#6FA8DC; --action-ink:#0E1620;
+  --ok:#6CC08F; --ok-bg:#183326; --bad:#EE7F74; --bad-bg:#3A1F1C;
+  --warn-bg:#3A2E14; --warn-ink:#E5B65A;
+  --dW:#7FA8E8; --dP:#F09270; --dG:#5EC29B;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#12181E; --surface:#1A222A; --ink:#E6EBF0; --muted:#9AA6B2; --rule:#2D3843; --soft:#222C36;
+  --action:#6FA8DC; --action-ink:#0E1620;
+  --ok:#6CC08F; --ok-bg:#183326; --bad:#EE7F74; --bad-bg:#3A1F1C;
+  --warn-bg:#3A2E14; --warn-ink:#E5B65A;
+  --dW:#7FA8E8; --dP:#F09270; --dG:#5EC29B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--action);outline-offset:2px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 64px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0 14px;border-bottom:1px solid var(--rule);margin-bottom:28px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em}
+.brand small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.tabs{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:10px}
+nav.tabs button{border:0;background:transparent;padding:7px 14px;border-radius:7px;font-weight:600;font-size:14px;color:var(--muted)}
+nav.tabs button[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px;letter-spacing:-.015em}
+h2{font-size:19px;margin:36px 0 12px;letter-spacing:-.01em}
+h3{font-size:16px;margin:0 0 6px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)} .small{font-size:14px}
+.save-state{font-size:13px;color:var(--muted);margin-top:36px}
+
+.ribbon{display:flex;gap:4px;margin:18px 0 6px;min-height:92px}
+.seg{position:relative;border:2px solid var(--c);border-radius:8px;background:var(--surface);color:var(--ink);text-align:left;padding:10px 10px 8px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;transition:background .15s,color .15s}
+.seg[aria-pressed="true"]{background:var(--c);color:#fff}
+:root[data-theme="dark"] .seg[aria-pressed="true"]{color:#0E1620}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg[aria-pressed="true"]{color:#0E1620}}
+.seg .pct{font-size:26px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.seg .nm{font-size:14px;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.seg .sub{font-size:12px;opacity:.9}
+.ribbon-note{font-size:13px;color:var(--muted);margin-bottom:24px}
+.field{margin:22px 0}
+.field > .lbl{font-weight:600;margin-bottom:8px;display:block}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--rule);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:500;font-size:14px}
+.chip[aria-pressed="true"]{border-color:var(--action);background:var(--action);color:var(--action-ink)}
+.chip.custom{display:inline-flex;align-items:center;gap:6px;padding:4px 6px 4px 14px}
+.chip.custom input{width:64px;border:1px solid var(--rule);border-radius:999px;padding:3px 8px;background:var(--bg)}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:20px}
+.pool-note{font-size:13px;color:var(--muted);margin-top:6px}
+.btn{border:0;background:var(--action);color:var(--action-ink);font-weight:600;padding:11px 22px;border-radius:9px;font-size:15px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--action);border:1.5px solid var(--action)}
+.btn.quiet{background:transparent;color:var(--muted);padding:11px 8px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+.drill-tag{display:inline-flex;gap:8px;align-items:center;background:var(--soft);border-radius:8px;padding:6px 10px;font-size:14px;margin-top:4px}
+.drill-tag button{border:0;background:none;color:var(--action);font-weight:600;padding:0}
+
+.qhead{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap}
+.dtag{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink)}
+.dtag::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.unv{background:var(--warn-bg);color:var(--warn-ink);font-weight:600;font-size:12px;padding:2px 9px;border-radius:999px}
+.progress{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;margin-bottom:22px}
+.progress > i{display:block;height:100%;background:var(--action);transition:width .2s}
+.stem{font-family:var(--serif);font-size:20px;line-height:1.55;margin:0 0 22px;max-width:68ch;outline:none}
+.opts{display:grid;gap:10px;margin-bottom:18px}
+.ch{border:1.5px solid var(--rule);background:var(--surface);border-radius:10px;overflow:hidden}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;border:0;background:none;width:100%;padding:12px 14px;line-height:1.45}
+.opt .key{flex:none;width:26px;height:26px;border-radius:6px;background:var(--soft);display:grid;place-items:center;font-weight:700;font-size:13px}
+.ch.sel{border-color:var(--action);box-shadow:0 0 0 1px var(--action)}
+.ch.sel .key{background:var(--action);color:var(--action-ink)}
+.ch.correct{border-color:var(--ok);background:var(--ok-bg)}
+.ch.correct .key{background:var(--ok);color:#fff}
+.ch.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.ch.wrong .key{background:var(--bad);color:#fff}
+.opt:disabled{cursor:default;color:inherit}
+.why{padding:0 14px 13px 52px;font-size:14.5px;line-height:1.5}
+.why .tag{display:block;font-weight:700;font-size:13px;margin-bottom:1px}
+.ch.correct .tag{color:var(--ok)} .ch.wrong .tag{color:var(--bad)}
+.verdict{border-left:4px solid var(--c);background:var(--surface);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:14px}
+.unvnote{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:14px}
+.kbd-hint{font-size:12px;color:var(--muted);margin-top:14px}
+.confirm{margin-top:14px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.stat{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px}
+.stat b{display:block;font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.hero-score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hero-score .big{font-size:64px;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.dom-rows{display:grid;gap:14px}
+.dom-row .top{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:5px;flex-wrap:wrap}
+.bar{position:relative;height:12px;background:var(--soft);border-radius:6px;overflow:visible}
+.bar > i{display:block;height:100%;border-radius:6px;background:var(--c)}
+.bar .target{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--soft);vertical-align:middle}
+th{font-weight:600;color:var(--muted);font-size:13px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.status{font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.s-weak{background:var(--bad-bg);color:var(--bad)} .s-dev{background:var(--warn-bg);color:var(--warn-ink)}
+.s-ok{background:var(--ok-bg);color:var(--ok)} .s-none{background:var(--soft);color:var(--muted)}
+.plan{counter-reset:p;display:grid;gap:12px;padding:0;margin:0;list-style:none}
+.plan li{counter-increment:p;display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px}
+.plan li::before{content:counter(p);width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:14px}
+.review-item{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px}
+.review-item .q{font-family:var(--serif);margin-bottom:8px}
+.review-item .ans{font-size:14px;margin-bottom:4px}
+.empty{background:var(--surface);border:1px dashed var(--rule);border-radius:12px;padding:28px}
+.chart{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);flex-wrap:wrap;margin-top:6px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;background:var(--c)}
+.danger{color:var(--bad)}
+.xall{margin-top:10px}
+.xall > summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--action);padding:4px 0}
+.xall .opts{margin:10px 0 0}
+.gotit{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:10px 12px;background:var(--soft);border-radius:8px;cursor:pointer;font-size:14px;line-height:1.4}
+.gotit input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--ok);cursor:pointer}
+.gotit .gotit-note{color:var(--muted)}
+.gotit.done{background:var(--ok-bg)}
+.miss-card{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin:18px 0 26px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.miss-card .n{font-size:34px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:var(--bad)}
+.miss-meta{font-size:13px;color:var(--muted);margin-bottom:6px}
+details.mastered{margin-top:34px}
+details.mastered summary{cursor:pointer;font-weight:600}
+.mastered-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--soft);font-size:14px}
+.linkbtn{border:0;background:none;color:var(--action);font-weight:600;padding:0;font-size:14px}
+@media (max-width:620px){
+  .ribbon{flex-direction:column;min-height:0}
+  .seg{flex:none !important;flex-direction:row;align-items:center;gap:12px;padding:10px 12px}
+  .seg .pct{font-size:20px;width:52px}
+  .seg > span:last-child{flex:1;text-align:left}
+  .stem{font-size:18px}
+  .hero-score .big{font-size:48px}
+  .plan li{grid-template-columns:28px 1fr}
+  .plan li .act{grid-column:2}
+  .why{padding-left:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">BCIS 1305 Midterm Review<small id="brandSub"></small></div>
+    <nav class="tabs" aria-label="Sections">
+      <button data-view="setup" aria-current="page">Practice</button>
+      <button data-view="progress">Progress</button>
+      <button data-view="missed">Missed questions</button>
+    </nav>
+  </header>
+  <main id="app"></main>
+  <p class="save-state" id="saveState">Your answers are saved in this browser on this device. Clearing your browser data erases them.</p>
+</div>
+<script id="qdata" type="application/json">[{"id": 1, "d": "W", "q": "Aimi is preparing a research paper. She needs to insert a parenthetical reference that gives credit to the source of a quotation. She has not yet used the source in the research paper. What is the best way for her to achieve this?", "o": ["Enter the parenthetical reference for the new source manually.", "Insert a footnote with the new source information.", "Insert an endnote with the new source information.", "Insert a citation with the new source information."], "c": 3, "e": ["Typing the reference by hand puts text on the page, but Word does not tie it to your source list, so it will not feed an automatic bibliography.", "A footnote places a numbered note at the bottom of the page. It is not a parenthetical reference.", "An endnote places a numbered note at the end of the document. It is not a parenthetical reference in the text.", "Correct. Insert Citation, then Add New Source, creates the parenthetical reference and saves the source so Word can build the bibliography from it."]}, {"id": 2, "d": "W", "q": "Laila clicks the table move handle at the upper-left corner of a table. What is she selecting?", "o": ["The top row in the table.", "The entire table.", "The first column in the table.", "The left border of the table."], "c": 1, "e": ["The move handle does not select just one row. To select a row, click in the margin to the left of it.", "Correct. The table move handle (the four arrow icon at the upper left) selects the entire table so you can move or format it as a unit.", "A column is selected by clicking just above it, not with the move handle.", "Borders are not selected with the move handle. It always targets the whole table."]}, {"id": 3, "d": "P", "q": "Which button do you use to enlarge your view of the content on a slide?", "o": ["Next Slide button", "Normal button", "Zoom In button", "Zoom Out button"], "c": 2, "e": ["Next Slide moves you to the following slide. It does not change how large the slide appears.", "The Normal button switches back to Normal view. It does not change the magnification.", "Correct. Zoom In enlarges your view of the slide content.", "Zoom Out makes the slide appear smaller, which is the opposite of what is needed."]}, {"id": 4, "d": "W", "q": "Alexis needs to move the text after a tab character further to the right. She should do which of the following?", "o": ["Move the appropriate tab stop to the right.", "Remove the tab stop.", "Insert space characters to move the text to the right.", "Move the appropriate tab stop to the left."], "c": 0, "e": ["Correct. A tab stop controls where text after a tab character lines up, so moving the stop to the right moves that text to the right.", "Removing a tab stop sends the text to the next default stop, which is not a controlled way to move it further right.", "Spaces can push text over, but the result is imprecise and breaks easily. Tab stops are the right tool.", "Moving the tab stop to the left would move the text left, the opposite of the goal."]}, {"id": 5, "d": "W", "q": "Amed needs his mail merge document to print alphabetically according to the City field and within each city, by Last Name. He should do which of the following?", "o": ["Filter the recipient list on multiple columns.", "Sort the recipient list by multiple columns.", "Edit the recipient list by arranging the merged documents in alphabetical order.", "There is no way to reorder the recipient entries."], "c": 1, "e": ["Filtering hides records that do not meet a condition. It does not change the order of the records.", "Correct. Sort the recipient list by City first and Last Name second, and the merged documents print in that order.", "You cannot rearrange documents after merging. The order comes from the recipient list.", "There is a way. The Sort feature in the Mail Merge Recipients dialog box orders records by up to three columns."]}, {"id": 6, "d": "P", "q": "Which of the following alignment options places a table so it is the same distance from the left and right edges of the slide?", "o": ["Align Left", "Align Right", "Align Center", "Center Vertically"], "c": 2, "e": ["Align Left places the table against the left edge, so the distances from the two edges are not equal.", "Align Right places the table against the right edge, so the distances are not equal.", "Correct. Align Center places the table the same distance from the left and right edges of the slide.", "Center Vertically positions the table from top to bottom, not left to right."]}, {"id": 7, "d": "W", "q": "To calculate the number of words in a section of a document, do which of the following?", "o": ["Select the text and then click the Word Count button on the status bar.", "Select the text and then click the Thesaurus button.", "Select the text and then click the Translate button.", "Select the text and then click the 'Spelling and Grammar' or Editor button."], "c": 0, "e": ["Correct. Selecting text and looking at the Word Count button on the status bar shows the number of words in the selection.", "The Thesaurus suggests synonyms for a word. It does not count words.", "Translate converts text to another language. It does not count words.", "Spelling and Grammar (or Editor) checks for errors. It is not the quick way to count words."]}, {"id": 8, "d": "P", "q": "Which view displays each slide so it fills the entire screen?", "o": ["Slide Show", "Slide Sorter", "Normal", "Notes Page"], "c": 0, "e": ["Correct. Slide Show view displays each slide full screen, the way an audience sees it.", "Slide Sorter shows thumbnails of all slides in a grid, not one slide full screen.", "Normal view shows the slide inside the editing window with panes around it.", "Notes Page view shows a slide with its speaker notes below it, not a full screen slide."]}, {"id": 9, "d": "W", "q": "Gabi is reading a document about geology when they encounter the word Paleolithic. To conduct research about the Paleolithic era, which of the following should they do to find information with sources that they could automatically add to their document?", "o": ["Click the Online Pictures button.", "Enter the word Paleolithic in the Search box.", "Right-click the word and select Translate.", "Click the Researcher button and then enter the word, Paleolithic, in the Search box in the Researcher pane."], "c": 3, "e": ["Online Pictures searches for images. It does not research a topic or supply sources.", "The Search box finds text within your document. It does not research outside sources.", "Translate converts the word to another language. It does not provide research.", "Correct. The Researcher pane searches reliable sources and lets you add a citation to your document automatically."]}, {"id": 10, "d": "P", "q": "Alia wants to add a picture to a slide that contains only a text content placeholder. How can she add a picture to the slide?", "o": ["Click the Shapes button on the Insert tab.", "Indent the text in the content placeholder to reveal the Pictures icon.", "Right-click the text content placeholder, and then click Convert to Picture.", "Click the Pictures button on the Insert tab."], "c": 3, "e": ["Shapes inserts a drawn shape such as a rectangle or arrow. It does not insert a picture.", "Indenting text changes its bullet level. It does not reveal a Pictures icon in a text only placeholder.", "PowerPoint has no Convert to Picture command on a placeholder's shortcut menu for this purpose.", "Correct. The Pictures button on the Insert tab lets you choose a picture to add to the slide. (Unverified answer.)"], "u": 1}, {"id": 11, "d": "P", "q": "Which PowerPoint view allows you to enter text, tables, charts, pictures, and other elements?", "o": ["Normal", "Outline", "Slide Show", "Slide Sorter"], "c": 0, "e": ["Correct. Normal view is where you work with text, tables, charts, pictures, and other slide elements.", "Outline view shows only the titles and text of slides, without graphics.", "Slide Show view is for presenting. You cannot edit content there.", "Slide Sorter view is for arranging and managing whole slides, not editing their contents."]}, {"id": 12, "d": "W", "q": "To move a shape to the top and center of a page and apply square text wrapping, which of the following should be done?", "o": ["Click the Position button and then click 'Position in Top Center with Square Text Wrapping'.", "Click the Wrap Text button and click Square.", "Click the Align button and then click Top.", "Click the Align button and then click Distribute Vertically."], "c": 0, "e": ["Correct. The Position gallery includes a preset that sets both the location (top center) and the text wrapping (square) in one step.", "Wrap Text sets only the wrapping style. It does not move the shape.", "Align Top moves the shape to the top, but it does not center it or apply square wrapping.", "Distribute Vertically spaces several objects evenly. It does not place one shape at top center."]}, {"id": 13, "d": "P", "q": "Kiaan wants to give people who attend his presentation a printed copy of the slides. Instead of printing one slide on a single sheet of paper, he wants to print two slides on each sheet. Which setting should he select on the Print tab in Backstage view to do this?", "o": ["Full Page Slides", "2 Slides in the Notes Pages area", "2 Slides in the Outline area", "2 Slides in the Handouts area"], "c": 3, "e": ["Full Page Slides prints one slide per page, not two.", "Notes Pages prints one slide per page with notes below it. It does not print two slides per sheet.", "Outline prints only the text of the slides, not the slides themselves.", "Correct. In the Handouts area you can print several slides per page, including two slides on each sheet."]}, {"id": 14, "d": "W", "q": "To align a graphic to the bottom of the page, which of the following should be done?", "o": ["Change the page orientation.", "Change the paragraph alignment.", "Change the vertical alignment of the object.", "Change the page margin."], "c": 2, "e": ["Changing the page orientation switches between portrait and landscape. It does not move an object to the bottom.", "Paragraph alignment controls left, center, and right placement of text, not an object's vertical position.", "Correct. Changing the object's vertical alignment (for example, Align Bottom relative to the page) places it at the bottom. (Unverified answer.)", "Changing the margin adjusts the blank space around text. It does not position a graphic."], "u": 1}, {"id": 15, "d": "P", "q": "Which of the following do you use to change the arrangement of placeholders on a slide?", "o": ["Themes gallery", "Layout gallery", "Placeholder gallery", "New Slide gallery"], "c": 1, "e": ["The Themes gallery changes colors, fonts, and effects for the whole presentation, not the placeholder arrangement.", "Correct. The Layout gallery changes how placeholders are arranged on a slide.", "PowerPoint does not have a Placeholder gallery.", "The New Slide gallery adds a new slide with a chosen layout. It does not rearrange an existing slide."]}, {"id": 16, "d": "P", "q": "Which of the following views includes a Slide pane, Slides tab, and Notes pane?", "o": ["Normal", "Outline", "Slide Show", "Slide Sorter"], "c": 0, "e": ["Correct. Normal view has the Slide pane, the Slides tab (thumbnails), and the Notes pane.", "Outline view replaces the thumbnails with the Outline tab and does not offer the same set of panes.", "Slide Show view fills the screen and has no panes.", "Slide Sorter view shows a grid of thumbnails, not these panes."]}, {"id": 17, "d": "W", "q": "While creating a document, Ariel needs to insert a blank line. How can Ariel do this?", "o": ["Press SHIFT without typing any text on the line.", "Press ENTER without typing any text on the line.", "Press INSERT, then select Blank Line from the shortcut menu.", "Press INSERT+PAGE DOWN and a blank line will automatically be created."], "c": 1, "e": ["SHIFT is a modifier key. Pressing it alone does not insert a line.", "Correct. Pressing ENTER with no text on the line inserts a paragraph mark, which creates a blank line.", "INSERT toggles between insert and overtype mode. It has no Blank Line command.", "INSERT+PAGE DOWN is not a Word command and does not create a blank line."]}, {"id": 18, "d": "P", "q": "If a word is marked as misspelled, which of the following commands changes all instances of that word to the correct spelling on all the slides in the presentation?", "o": ["Change", "Change All", "Ignore All", "Accept"], "c": 1, "e": ["Change corrects only the one instance currently flagged.", "Correct. Change All corrects every instance of the misspelled word throughout the presentation.", "Ignore All leaves every instance as is. It does not correct them.", "Accept is not a command in the Spelling pane for fixing a misspelled word."]}, {"id": 19, "d": "P", "q": "Isla inserted a chart on a slide. A few days later, a colleague sent her updated data. How should Isla edit the data on the chart?", "o": ["Double-click the chart, and then edit the data in the spreadsheet.", "Click the Edit Data button on the Chart Design tab, and then edit the data in the spreadsheet.", "Click the data marker on the chart that corresponds to the number that needs to change, type the new number, and then press ENTER.", "You cannot edit chart data, so Isla must delete and then recreate the chart."], "c": 1, "e": ["Double-clicking a chart does not reliably open the data. The Edit Data command is the standard method.", "Correct. Edit Data on the Chart Design tab opens the underlying worksheet so you can update the numbers.", "You cannot type over a data marker. Chart values live in the worksheet behind the chart.", "You can edit chart data, so there is no need to delete and recreate the chart."]}, {"id": 20, "d": "P", "q": "To change the title of a slide in Outline view, what must you do first?", "o": ["Select the specific slide you want to change.", "Change the view to Normal view.", "Highlight the text you want to change.", "Duplicate the slide."], "c": 2, "e": ["Selecting the slide thumbnail selects the whole slide, not the text you want to change.", "You do not need to leave Outline view. You can edit text directly in the Outline pane.", "Correct. Highlight the existing title text in the Outline pane, then type the new title. (Unverified answer.)", "Duplicating makes a copy of the slide. It does not change a title."], "u": 1}, {"id": 21, "d": "W", "q": "The recipients in a mail merge document include addresses that span multiple lines. The author should make sure the mail merge document includes which of the following fields?", "o": ["Address_Line_1 only.", "Address_Line_2 only.", "Address_Line_1 and Address_Line_2.", "Merge Address_Line_1 and Address_Line_2 together"], "c": 2, "e": ["Using only Address_Line_1 would leave out the second line of addresses that span two lines.", "Using only Address_Line_2 would leave out the first line of the address.", "Correct. Include both address line fields so multi line addresses print completely. (Unverified answer.)", "Word does not offer an option phrased this way. Fields are inserted into the main document separately."], "u": 1}, {"id": 22, "d": "W", "q": "Rohan has a list of customers in an Access database that he would like to use as a recipient list for a mail merge. Which of the following should be done?", "o": ["Choose an existing recipient list that has been filtered.", "Enter each record into a new recipient list during the mail merge.", "Copy the records in Access to a mail merge recipient list.", "Use the Access database as the data source for the mail merge."], "c": 3, "e": ["Filtering an existing list limits which records are used, but it is not the Access database itself.", "Retyping every record is unnecessary and invites errors.", "Copying records manually is not how Word connects to Access data.", "Correct. Use an existing list and select the Access database as the data source."]}, {"id": 23, "d": "G", "q": "Jordan wants a warm color palette for his SmartArt. He should do which of the following?", "o": ["Click the Change Colors button and select the desired option.", "Change the SmartArt layout.", "Click the Shape Effects button and select the desired option.", "Compress the SmartArt graphic."], "c": 0, "e": ["Correct. Change Colors on the SmartArt Design tab offers color palettes, including warm ones.", "Changing the layout changes the structure of the diagram, not its colors.", "Shape Effects adds effects such as shadows or glows. It does not change the palette.", "Compress applies to pictures, not SmartArt."]}, {"id": 24, "d": "G", "q": "Which key or keys do you press to indent a first-level item in a list so it becomes a second-level item?", "o": ["Spacebar", "Tab", "Right Arrow", "Shift+Tab"], "c": 1, "e": ["The Spacebar adds a space. It does not change the list level.", "Correct. Pressing Tab demotes a first level item to the second level.", "The Right Arrow key moves the insertion point. It does not change the level.", "Shift+Tab does the opposite. It promotes an item to a higher level."]}, {"id": 25, "d": "G", "q": "To resize a shape proportionally, which of the following should be done?", "o": ["Drag a corner sizing handle.", "Select the Lock aspect ratio check box in the Layout dialog box and then enter values.", "Drag a middle sizing handle.", "Press ALT+SHIFT and then drag a corner sizing handle."], "c": 0, "e": ["Correct. Dragging a corner sizing handle changes width and height together, so the shape keeps its proportions.", "This can keep proportions, but it takes extra steps. The expected method is dragging a corner handle.", "Middle handles change only one dimension, which distorts the shape.", "This is not the standard method. Alt temporarily overrides snapping to the grid."]}, {"id": 26, "d": "G", "q": "Which of the following alignment options places text so it is the same distance from the left and right edges in a table cell?", "o": ["Align Left", "Align Right", "Center", "Center Vertically"], "c": 2, "e": ["Align Left pushes text to the left edge of the cell.", "Align Right pushes text to the right edge of the cell.", "Correct. Center places text the same distance from the left and right edges of the cell.", "Center Vertically positions text between the top and bottom of the cell, not left and right."]}, {"id": 27, "d": "G", "q": "What can you use to identify parts of a chart with colors associated with the chart categories?", "o": ["A legend", "A title", "A chart style", "An animation"], "c": 0, "e": ["Correct. A legend uses colors to identify the categories or series in a chart.", "A title names the chart. It does not explain what the colors mean.", "A chart style changes the look of the chart. It does not identify parts of it.", "An animation controls how the chart moves during a slide show. It does not label anything."]}, {"id": 28, "d": "W", "q": "Syd needs to start each word in a paragraph with a capital letter. Which of the following is the simplest method to achieve this?", "o": ["Delete the first character of each word and retype it as a capital letter.", "Write a macro to replace the first character in each word with a capital letter.", "Click the 'Text Effects and Typography' button, and select the desired option.", "Click the Change Case button, and select 'Capitalize Each Word'."], "c": 3, "e": ["Retyping each first letter is slow and error prone.", "Writing a macro is far more work than this simple task needs.", "Text Effects and Typography changes fill, outline, and similar effects. It does not change capitalization.", "Correct. Change Case, then Capitalize Each Word, does it in two clicks."]}, {"id": 29, "d": "G", "q": "To recolor a picture with a green tint, which of the following should be done?", "o": ["Click the Corrections button and select the desired option.", "Click the Color button and select the desired option.", "Click the Artistic Effects button and select the desired option.", "Click the Change Picture button and select the desired option."], "c": 1, "e": ["Corrections adjusts sharpness, brightness, and contrast. It does not tint the picture.", "Correct. The Color button recolors a picture, including applying a green tint.", "Artistic Effects applies styles such as paint strokes or pencil sketch.", "Change Picture swaps in a different picture."]}, {"id": 30, "d": "W", "q": "Hannah needs to position a picture in the middle and center of a page with square text wrapping. She should do which of the following?", "o": ["Click Align and click Align Middle.", "Click the Wrap Text button and then click 'Top and Bottom'.", "Click Align and then click Align Center.", "Click the Position button and then click the appropriate option."], "c": 3, "e": ["Align Middle centers the picture vertically only, and it does not apply square wrapping.", "Top and Bottom wrapping is not square wrapping, and it does not position the picture.", "Align Center centers the picture horizontally only, and it does not set wrapping.", "Correct. The Position gallery includes Middle Center with Square Text Wrapping."]}, {"id": 31, "d": "G", "q": "In an Excel worksheet, what is the intersection of a row and a column called?", "o": ["Data box", "Graphic", "Text box", "Cell"], "c": 3, "e": ["Data box is not an Excel term.", "A graphic is an object such as a picture or shape, not the intersection of a row and column.", "A text box is a shape that holds text, not a worksheet location.", "Correct. A cell is the intersection of a row and a column."]}, {"id": 32, "d": "P", "q": "How does PowerPoint flag a word that might be misspelled?", "o": ["The word flashes on the screen.", "The word has a yellow highlight.", "The font color of the word changes to red.", "A wavy red line appears below the word."], "c": 3, "e": ["Words do not flash in PowerPoint.", "PowerPoint does not use a yellow highlight to flag spelling.", "The font color does not change. The text stays as formatted.", "Correct. A wavy red line appears below a word that might be misspelled."]}, {"id": 33, "d": "W", "q": "To see a thumbnail list of pages in a document, do which of the following?", "o": ["Click the Arrange All button.", "Click the 'Side by Side' button.", "Open the Navigation pane and select the Headings tab.", "Open the Navigation pane and select the Pages tab."], "c": 3, "e": ["Arrange All tiles the windows of your open documents. It does not show page thumbnails.", "Side by Side lets you compare two documents. It does not show page thumbnails.", "The Headings tab shows an outline of your headings, not thumbnails.", "Correct. The Pages tab in the Navigation pane shows thumbnails of each page."]}, {"id": 34, "d": "P", "q": "During a slide show, a bulleted list uses the Fly In entrance animation so that all the bulleted items appear on the slide at the same time. If you want each item in the list to appear one at a time, which effect option should you choose?", "o": ["All at Once", "As One Object", "From Bottom", "By Paragraph"], "c": 3, "e": ["All at Once is the behavior you are trying to change. All items appear at the same time.", "As One Object animates the entire list as a single object, so items still appear together.", "From Bottom controls the direction of the Fly In. It does not control the timing of the items.", "Correct. By Paragraph makes each bulleted item appear one at a time."]}, {"id": 35, "d": "W", "q": "Jamal needs more space between two paragraphs in a document. He has positioned the insertion point in the last line of the top paragraph. Which of the following is the best method to use to adjust the spacing between the two paragraphs?", "o": ["Drag the Zoom slider to a larger percentage to change the line spacing.", "Press ENTER at the end of each line to change the space between lines.", "Change the value of the Spacing Before box in the Paragraph group on the Layout tab.", "Change the value of the Spacing After box in the Paragraph group on the Layout tab."], "c": 3, "e": ["Zoom changes how large the page looks on screen. It does not change the spacing in the document.", "Pressing ENTER adds extra blank paragraphs, which is a messy way to add space.", "Spacing Before would add space above the paragraph that holds the insertion point, which is the top paragraph, not between the two.", "Correct. Spacing After on the top paragraph adds space between it and the paragraph below."]}, {"id": 36, "d": "W", "q": "Yukio needs to view the paragraph marks in a document. Which of the following should he do?", "o": ["Enter Web Layout view.", "Enter Read Mode.", "Click the check box to show Gridlines.", "Click the Show/Hide ¶ button."], "c": 3, "e": ["Web Layout shows how the document would look as a web page. It does not show paragraph marks.", "Read Mode is for reading. Formatting marks are hidden there.", "Gridlines are an alignment aid. They are not paragraph marks.", "Correct. The Show/Hide button displays paragraph marks and other formatting marks."]}, {"id": 37, "d": "P", "q": "Which of the following do you select to change all the colors used in a presentation?", "o": ["A new set of theme colors", "A new set of theme effects", "A new slide background", "A new slide layout"], "c": 0, "e": ["Correct. Choosing a new set of theme colors changes the colors used across the whole presentation.", "Theme effects change things like shadows and bevels, not the colors.", "A background changes only the slide background.", "A layout changes how placeholders are arranged, not colors."]}, {"id": 38, "d": "P", "q": "How do you resize a picture proportionally so that the image does not become distorted?", "o": ["Drag the picture to the bottom of the slide and then release the picture quickly so that it resizes automatically.", "Drag a middle sizing handle on the side of the picture.", "Drag a corner sizing handle.", "Double-click the picture, and then click OK in the dialog box that opens."], "c": 2, "e": ["Dragging a picture to the bottom of a slide only moves it. It does not resize it.", "A middle sizing handle changes only one dimension, which distorts the picture.", "Correct. A corner sizing handle changes width and height together, which keeps the picture in proportion.", "Double-clicking opens the Picture Format tab. It does not resize the picture."]}, {"id": 39, "d": "P", "q": "Which view shows the titles and text of a presentation without any graphics?", "o": ["Normal view", "Outline view", "Slide Sorter view", "Reading view"], "c": 1, "e": ["Normal view shows graphics along with text.", "Correct. Outline view shows only the titles and text of the slides.", "Slide Sorter view shows thumbnails of the full slides, including graphics.", "Reading view shows slides, graphics included, in a window."]}, {"id": 40, "d": "W", "q": "To enter a new recipient list for a mail merge, which of the following options should be selected?", "o": ["'Use an existing list'", "'Select from Outlook contacts'", "'Type a new list'", "'Import recipient list'"], "c": 2, "e": ["Use an existing list opens a list that has already been created.", "Select from Outlook contacts pulls from your Outlook contact list.", "Correct. Type a new list lets you enter recipients from scratch.", "This is not the wording of the option in the Mail Merge Wizard."]}, {"id": 41, "d": "G", "q": "Which of the following is a grid composed of columns and rows used to organize data?", "o": ["Table", "Chart", "Graph", "Data label"], "c": 0, "e": ["Correct. A table is a grid of columns and rows used to organize data.", "A chart is a graphic that shows data visually.", "A graph is a visual display of data, not a grid of rows and columns.", "A data label shows the value of a data point on a chart."]}, {"id": 42, "d": "W", "q": "Imani needs to duplicate a picture in her document. She should do which of the following?", "o": ["Copy and paste the picture.", "Rotate the picture.", "Change the picture.", "Reset the picture."], "c": 0, "e": ["Correct. Copying and pasting duplicates a picture.", "Rotating turns the picture. It does not duplicate it.", "Change Picture replaces a picture with a different one.", "Reset Picture removes formatting changes. It does not duplicate it."]}, {"id": 43, "d": "G", "q": "Which type of chart shows trends during a continuous period of time?", "o": ["Column", "Line", "Pie", "Bar"], "c": 1, "e": ["A column chart compares values across categories. It is not the best choice for a trend over continuous time.", "Correct. A line chart shows trends over a continuous period of time.", "A pie chart shows parts of a whole at one point in time.", "A bar chart compares values across categories using horizontal bars."]}, {"id": 44, "d": "P", "q": "If Slide 6 is displayed in Normal view, which button do you click to run the slide show from the beginning?", "o": ["From Beginning button on the Slide Show tab", "Slide Show button on the status bar", "Start from Slide 1 button on the status bar", "From Current Slide button on the View tab"], "c": 0, "e": ["Correct. From Beginning on the Slide Show tab always starts at Slide 1.", "The Slide Show button on the status bar starts from the current slide, which is Slide 6.", "There is no Start from Slide 1 button on the status bar.", "From Current Slide starts at Slide 6, and it is on the Slide Show tab, not the View tab."]}, {"id": 45, "d": "P", "q": "Inez is planning a cruise for her family's upcoming reunion. She wants to show family members pictures of the different cabins that are available, so she adds them to slides in a presentation. One of the images shows two views of the same room combined into one picture. Inez thinks this is confusing. Which of the following actions can she take to address this?", "o": ["Cover the unwanted area of the picture with crop marks.", "Crop the unwanted area of the picture using the Crop command.", "Crop the unwanted area of the picture using the Beveled Matte, White picture style.", "Flip the picture."], "c": 1, "e": ["Crop marks are not a tool for covering part of a picture.", "Correct. The Crop command trims away the part of the picture you do not want.", "A picture style adds borders and effects. It does not remove part of the picture.", "Flipping mirrors the picture. It does not remove anything."]}, {"id": 46, "d": "P", "q": "If you want to insert slides from one presentation into a new presentation, which of the following methods can you use?", "o": ["Copy the other presentation file from a File Explorer window, and then paste the file on a slide in the new presentation.", "Use the Reuse Slides command.", "Use the Slides from Outline command.", "Use the Reset Slides command."], "c": 1, "e": ["Pasting a file from File Explorer onto a slide does not import its slides.", "Correct. Reuse Slides lets you insert slides from another presentation.", "Slides from Outline builds slides from a text outline, not from another presentation.", "Reset resets a slide's position, size, and formatting to its layout defaults."]}, {"id": 47, "d": "W", "q": "Treyvon would like to shade one word in a paragraph. Which of the following should he do before he opens the Shading gallery to select the shading color?", "o": ["Select the word he would like to shade.", "Position the insertion point at the beginning of the word he would like to shade.", "Position the insertion point at the end of the word he would like to shade.", "Position the insertion point in the word he would like to shade."], "c": 0, "e": ["Correct. Select the word first. Shading applies to what is selected.", "Placing the insertion point does not select the word, so the shading would apply to the whole paragraph instead.", "The same problem applies. With no selection, the shading goes to the whole paragraph.", "Even with the insertion point inside the word, nothing is selected, so the shading applies to the paragraph."]}, {"id": 48, "d": "P", "q": "David Trueheart's last name is marked as misspelled on slides in his presentation. His name appears on several slides. When he uses the Spelling command and his last name appears in the Spelling pane as an error, which of the following commands is the best choice for resolving the error?", "o": ["Change", "Change All", "Ignore", "Ignore All"], "c": 3, "e": ["Change would replace the name with a suggestion, which is wrong because the name is spelled correctly.", "Change All would replace the name everywhere with a suggestion.", "Ignore skips only this one instance, so the name would be flagged again on the other slides.", "Correct. Ignore All skips every instance of the name in the presentation."]}, {"id": 49, "d": "P", "q": "Which of the following Print settings prints each slide at the top of the page with speaker notes below the slide?", "o": ["Full Page Slides", "Notes Pages", "Outline with Notes", "Handouts with Comments"], "c": 1, "e": ["Full Page Slides prints only the slide on the page, with no notes.", "Correct. Notes Pages prints each slide at the top of the page with speaker notes below.", "Outline prints only the text of the slides, not the slides themselves.", "Handouts prints several slides per page. Speaker notes are not printed below each slide."]}, {"id": 50, "d": "W", "q": "Samantha does not have a prepared data source of customers she wishes to use for a mail merge, but she has their information that she can enter. While using the Mail Merge Wizard, she should select which of the following options?", "o": ["'Type a new list'", "'Select from Outlook contacts'", "'Use an existing list'", "'Import an existing data source'"], "c": 0, "e": ["Correct. Type a new list lets you enter the customer information yourself.", "Select from Outlook contacts requires the information to already be in Outlook.", "Use an existing list requires a prepared file, which Samantha does not have.", "This is not the wording of the option in the Mail Merge Wizard."]}, {"id": 51, "d": "P", "q": "If you create a new blank presentation with only a title slide, what happens when you click the New Slide button on the Home tab?", "o": ["A new slide is created with the Title and Content layout applied.", "A new slide is created with the Two Content layout applied.", "A new slide is created with the Blank layout applied so that you can choose which layout to use.", "A dialog box opens asking you to select a slide layout."], "c": 0, "e": ["Correct. A new slide uses the Title and Content layout by default.", "Two Content is available in the layout gallery but is not the default.", "The new slide is not blank. It has the Title and Content layout.", "No dialog box opens. The slide is added immediately."]}, {"id": 52, "d": "W", "q": "One of the pictures in Destiny's document is covered by text. To position the obscured picture on top of the text, which of the following text wrapping options should she use?", "o": ["In Front of Text", "Behind Text", "Square", "Through"], "c": 0, "e": ["Correct. In Front of Text places the picture on top of the text.", "Behind Text puts the picture underneath the text.", "Square wraps the text around the picture, so the picture would not sit on top of the text.", "Through wraps the text through the picture's outline. It does not place the picture over text."]}, {"id": 53, "d": "W", "q": "Jared has envelopes that do not fit in his printer. He knows there is a way to automate adding addresses to the envelopes. Which of the following would you advise him to do?", "o": ["Use mail merge to create mailing labels for the envelopes.", "Create a table in a document with all the recipient information.", "Save the recipient information to an HTML document.", "Since his envelopes do not fit in his printer, he cannot automate the process."], "c": 0, "e": ["Correct. Mail merge can automate adding addresses from a recipient list to labels or envelopes. (Unverified answer.)", "A table would hold the information, but it would not automate printing addresses.", "An HTML document would not print addresses on envelopes.", "This is false. Mail merge provides a way to automate the process."], "u": 1}, {"id": 54, "d": "W", "q": "Laila needs to center a picture in her document at the bottom of a page with Square text wrapping. She should do which of the following?", "o": ["Click the Position button, and then select the desired option.", "Click the Align button, and then select the desired option.", "Click the Wrap Text button, and then select the desired option.", "Click the Corrections button, and then select the desired option."], "c": 0, "e": ["Correct. The Position gallery has a Bottom Center with Square Text Wrapping option.", "Align does not set text wrapping.", "Wrap Text sets wrapping only. It does not position the picture.", "Corrections adjusts brightness and contrast. It does not position the picture."]}, {"id": 55, "d": "W", "q": "James needs to correct an error in a mail merge recipient list. He should do which of the following?", "o": ["Preview results.", "Select recipients.", "Edit the recipient list.", "Merge to Adobe PDF."], "c": 2, "e": ["Preview Results shows how the merge will look, but it does not edit the list.", "Select Recipients chooses which list to use, but it does not edit the entries.", "Correct. Edit Recipient List opens the list so you can fix an error.", "Merge to Adobe PDF completes the merge. It does not correct the list."]}, {"id": 56, "d": "G", "q": "Jeremiah has inserted a table and needs to fill it with data. After entering a value, he should do which of the following to advance the insertion point to the next cell in the table?", "o": ["Press TAB.", "Press ENTER.", "Press ESC.", "Press INSERT."], "c": 0, "e": ["Correct. Pressing TAB moves the insertion point to the next cell.", "Pressing ENTER adds a new paragraph inside the current cell.", "ESC cancels an action. It does not move to the next cell.", "INSERT toggles between insert and overtype mode."]}, {"id": 57, "d": "W", "q": "Joanne needs to have text inserted in a mail merge document when the recipient's city is Fairview. She should do which of the following?", "o": ["Insert an IF field in the document.", "Insert a Fill in field in the document.", "Insert a Next Record field in the document.", "Insert a Set Bookmark field in the document."], "c": 0, "e": ["Correct. An IF field inserts text only when a condition is met, such as the city equaling Fairview.", "A Fill in field prompts the user to type text during the merge.", "A Next Record field moves to the next recipient record.", "A Set Bookmark field is not used to insert conditional text."]}, {"id": 58, "d": "W", "q": "Jerome needs to create a document with a list of names and telephone numbers for his chess club. He should select which of the following options when starting a mail merge via the Mail Merge Wizard?", "o": ["Letters", "Email messages", "Directory", "Labels"], "c": 2, "e": ["Letters creates one letter per recipient, not a list of names and numbers.", "E-mail messages creates one message per recipient, not a list.", "Correct. Directory creates a single list that includes all the records, such as names and phone numbers.", "Labels creates a sheet of labels, one per recipient, not a list in a document."]}, {"id": 59, "d": "W", "q": "To change the zoom of a document so that the edges of the page are placed at the edges of the document window, which of the following should you do?", "o": ["Click Page Width in the Zoom group on the View tab.", "Click Multiple Pages in the Zoom group on the View tab.", "Click Side to Side in the Page Movement group on the View tab.", "Click Read Mode in the Views group on the View tab."], "c": 0, "e": ["Correct. Page Width in the Zoom group places the page edges at the edges of the window.", "Multiple Pages shows several pages on the screen at once.", "Side to Side changes how pages move as you scroll. It is not a zoom setting.", "Read Mode changes the view for reading, not the zoom to page width."]}, {"id": 60, "d": "W", "q": "Royce needs to enter his last name before the page numbers that currently are displayed at the top of each page in his MLA style research paper. Which of the following is the best method to achieve this?", "o": ["Edit the document header.", "Manually enter the desired text at the top of each page.", "Modify the document properties.", "Post a comment at the top of each page."], "c": 0, "e": ["Correct. The header repeats on every page, so editing it once changes all pages.", "Typing the text on each page is slow and unreliable.", "Document properties are file information. They do not print on pages.", "Comments do not print as part of the page text."]}, {"id": 61, "d": "W", "q": "Jared doesn't see two customers in the recipient list for his mail merge, but he is certain their information was entered into the list. He should do which of the following?", "o": ["Clear any filters applied to the list.", "Merge to Adobe PDF and examine the merged documents.", "Add them to the recipient list.", "Preview results."], "c": 0, "e": ["Correct. A filter can hide records. Clear the filters to see all recipients.", "Merging to PDF would show the same incomplete results.", "The entries already exist. Adding them again would create duplicates.", "Preview Results shows the merge, but it will not reveal records hidden by a filter."]}, {"id": 62, "d": "W", "q": "Ragnar has just corrected the title of a periodical in his sources list. The periodical's title in the bibliography still displays the uncorrected text. To ensure that his bibliography accurately reflects the sources in his source list, which of the following should he do?", "o": ["Add the source to the Master List.", "Add the source to the Current List.", "Wait a minute; the source list will update automatically.", "Update the bibliography."], "c": 3, "e": ["The Master List stores sources for use in other documents. Adding a source there does not refresh the bibliography.", "The Current List shows sources used in this document. Adding a source there does not update the bibliography.", "A bibliography does not update automatically. It is a field you must refresh.", "Correct. Update the bibliography so it reflects the corrected source."]}, {"id": 63, "d": "W", "q": "To select a paragraph, you should do which of the following?", "o": ["Place the insertion point within the paragraph and press ALT+A.", "Double-click the paragraph.", "Place the insertion point within the paragraph and press CTRL+A.", "Triple-click the paragraph."], "c": 3, "e": ["ALT+A is not a Word shortcut for selecting a paragraph.", "Double-clicking selects a single word.", "CTRL+A selects the entire document, not just one paragraph.", "Correct. Triple-clicking selects a paragraph."]}, {"id": 64, "d": "W", "q": "The file that contains the variable, or changing, values from one merged document to the next is a ________.", "o": ["Data source", "Main document", "Header record", "Data filter"], "c": 0, "e": ["Correct. The data source holds the values that change from one merged document to the next.", "The main document holds the text that stays the same.", "A header record holds the field names in a data source.", "A data filter limits which records are used."]}, {"id": 65, "d": "W", "q": "Jasmine needs to insert the text, Illinois, when the State field is blank. She should do which of the following?", "o": ["Insert a Fill in field in the document.", "Insert a Set Bookmark field in the document.", "Insert an IF field in the document.", "Insert a Next Record field in the document."], "c": 2, "e": ["A Fill in field asks the user to type text, so it is not used for automatic text.", "A Set Bookmark field does not insert conditional text.", "Correct. An IF field can insert Illinois when the State field is blank.", "A Next Record field moves to the next record. It does not insert text."]}, {"id": 66, "d": "W", "q": "Which of the following refers to a printed line that surrounds the outer part of a page?", "o": ["page border", "page boundary", "page margin", "page edge"], "c": 0, "e": ["Correct. A page border is a printed line that surrounds the outer part of a page.", "Page boundary is not the term Word uses.", "The page margin is the blank space around text, not a printed line.", "Page edge is not the term Word uses."]}, {"id": 67, "d": "W", "q": "You can merge documents to a printer or to a new document.", "o": ["True.", "False."], "c": 0, "e": ["Correct. When you finish a merge, you can send the output to a printer or to a new document.", "This is false. Both options are available."]}, {"id": 68, "d": "W", "q": "The dynamic parts of a mail merge that are populated with recipient information are which of the following?", "o": ["Labels", "Merge fields", "Tables", "Equations"], "c": 1, "e": ["Labels are a type of merge document, not the dynamic parts.", "Correct. Merge fields are the placeholders that Word fills with each recipient's information.", "Tables organize content. They are not the dynamic parts of a merge.", "Equations are mathematical expressions, not merge content."]}, {"id": 69, "d": "G", "q": "What do you call the small circles that appear in the corners and in the middle of a selected object's border?", "o": ["Magnification handles", "Sizing handles", "Zoom handles", "Object handles"], "c": 1, "e": ["Magnification handles is not a term used in Office.", "Correct. Sizing handles are the small circles on the corners and sides of a selected object.", "Zoom handles is not a term used in Office.", "Object handles is not a term used in Office."]}, {"id": 70, "d": "G", "q": "Amir created a column chart from a data source that listed the sales of three sales reps over the course of six months. He wants the chart to compare the sales of each rep. But when he created the chart, the months appeared on the horizontal axis instead of the names of the sales reps. What can he do to change the chart so that the names of the sales reps appear on the horizontal axis?", "o": ["Change the chart type.", "Change the chart layout", "Switch the rows and columns.", "Switch the data labels."], "c": 2, "e": ["Changing the chart type changes the style of chart, but not what appears on each axis.", "A chart layout changes which elements appear, but it does not swap the data on the axes.", "Correct. Switch Row/Column swaps the data plotted on the axes.", "Data labels show values on the chart. They do not change the axes."]}, {"id": 71, "d": "G", "q": "Which of the following provides visual cues extending across the plot area from the horizontal and vertical axes in a chart?", "o": ["Legend", "Gridlines", "Data labels", "Title"], "c": 1, "e": ["A legend identifies the colors or series. It does not extend across the plot area.", "Correct. Gridlines extend across the plot area from the axes to make values easier to read.", "Data labels show the value of individual data points.", "A title names the chart."]}, {"id": 72, "d": "G", "q": "When you change the font size of text, you are increasing or decreasing which of the following measurement units?", "o": ["Inches", "Millimeters", "Pixels", "Points"], "c": 3, "e": ["Font size is not measured in inches.", "Font size is not measured in millimeters.", "Font size is not measured in pixels.", "Correct. Font size is measured in points."]}, {"id": 73, "d": "G", "q": "Tai dragged the rotation handle above a picture. This resulted in which of the following?", "o": ["Flipped the shape vertically.", "Flipped the shape horizontally.", "Stretched the shape nonproportionally.", "Rotated the shape."], "c": 3, "e": ["Flipping vertically is done with the Rotate command, not the rotation handle.", "Flipping horizontally is done with the Rotate command, not the rotation handle.", "Stretching happens when you drag a sizing handle.", "Correct. The rotation handle rotates the shape."]}, {"id": 74, "d": "W", "q": "Susan has a table that exceeds a page in length. The header row (the first row) must appear at the top of the table on each continued page. She should do which of the following?", "o": ["Click the 'Repeat Header Rows' button.", "Split the table.", "Delete several rows so that the table fits on one page.", "Decrease the row height of the rows in the table."], "c": 0, "e": ["Correct. Repeat Header Rows makes the first row appear at the top of the table on each page.", "Split Table divides a table into two tables. It does not repeat the header.", "Deleting rows removes data and does not solve the problem.", "A smaller row height might not fit the table on a page and does not repeat the header."]}, {"id": 75, "d": "P", "q": "If a photo on a slide looks too orange or too blue, what can you do to fix this?", "o": ["Change the saturation.", "Sharpen the photo.", "Soften the photo.", "Change the tone."], "c": 3, "e": ["Saturation changes the intensity of the colors, not the overall color cast.", "Sharpening makes details clearer. It does not fix color casts.", "Softening blurs detail. It does not fix color casts.", "Correct. Changing the color tone (temperature) corrects an orange or blue cast."]}, {"id": 76, "d": "P", "q": "Which view do you choose if you want to see a thumbnail of each slide arranged in a grid?", "o": ["Normal", "Outline", "Slide Show", "Slide Sorter"], "c": 3, "e": ["Normal view shows one slide at a time for editing.", "Outline view shows only the text.", "Slide Show view shows slides full screen to an audience.", "Correct. Slide Sorter view shows a thumbnail of each slide in a grid."]}, {"id": 77, "d": "W", "q": "To create a cycle diagram in a document, which of the following should be done?", "o": ["Click the SmartArt button and select the desired option.", "Click the Chart button and select the desired option.", "Click the Shapes button and select the desired option.", "Click the Table button and select the desired option."], "c": 0, "e": ["Correct. SmartArt includes a Cycle category for cycle diagrams.", "A chart displays numeric data.", "Shapes would require you to build the diagram by hand.", "A table organizes data into rows and columns."]}, {"id": 78, "d": "G", "q": "Which of the following commands lets you add color to table cells?", "o": ["Shadow", "Bevel", "Shading", "Glow"], "c": 2, "e": ["Shadow adds a shadow effect. It does not fill the cell with color.", "Bevel gives a 3D look. It does not fill the cell with color.", "Correct. Shading adds color to table cells.", "Glow adds a colored halo effect around an object."]}, {"id": 79, "d": "W", "q": "Which of the following document properties can you manually change by opening Backstage view and clicking Info?", "o": ["the file size", "the date you created the file", "the size of the file", "comments about the file"], "c": 3, "e": ["The file size is calculated automatically and cannot be edited.", "The creation date is recorded automatically and cannot be edited.", "The size of the file is calculated automatically, so it cannot be changed.", "Correct. Comments are one of the properties you can type in."]}, {"id": 80, "d": "G", "q": "To format a picture using a named group of formatting options, which of the following should you change?", "o": ["The picture border", "The picture saturation", "The picture style", "The picture effects"], "c": 2, "e": ["A border is a single formatting option, not a named group.", "Saturation is a single formatting option, not a named group.", "Correct. A picture style is a named group of formatting options.", "Picture effects are individual options, not a named group."]}, {"id": 81, "d": "P", "q": "A picture on the title slide in Jacob's presentation is too large for the space. To change its size, he dragged the middle sizing handle on the right side of the picture. Now the picture looks distorted. What went wrong?", "o": ["When a picture is on the title slide, you cannot change its size proportionally.", "Because he dragged a middle sizing handle instead of a corner sizing handle, the image changed in one dimension but not the other.", "He needs to drag the rotate handle to resize proportionally.", "He needs to drag the right and left middle sizing handles by the same amount."], "c": 1, "e": ["You can change the size of a picture on a title slide proportionally.", "Correct. A middle handle changes only one dimension, so the picture is distorted. A corner handle keeps the proportions.", "The rotate handle turns the picture. It does not resize it.", "Dragging both middle handles still changes only the width, so the picture stays distorted."]}, {"id": 82, "d": "W", "q": "Which of the following steps typically is the first step in a mail merge?", "o": ["Create or select a main document for the mail merge.", "Edit the recipient list for the mail merge.", "Merge the main document with the recipient list.", "Preview the merged document."], "c": 0, "e": ["Correct. The first step is to create or select the main document.", "Editing the recipient list comes after the main document is chosen.", "Merging is one of the last steps.", "Previewing happens before finishing the merge, not first."]}, {"id": 83, "d": "G", "q": "Which of the following commands changes the height of the rows in a selected table so that they are the same size while maintaining the height of the table?", "o": ["Change Row Height", "Change Cell Size", "Distribute Columns", "Distribute Rows"], "c": 3, "e": ["Row Height sets a specific height. It does not make rows the same size while keeping the table height.", "Cell Size is the name of a group, not the command.", "Distribute Columns evens out column widths, not row heights.", "Correct. Distribute Rows makes the rows the same height while keeping the overall table height."]}, {"id": 84, "d": "P", "q": "When you edit an embedded object, what happens to the source file?", "o": ["Nothing because the embedded object is not linked to the source file, only to the source program.", "The changes are made in both the embedded object and in the source file.", "The changes are made in the embedded object, and then the source file automatically opens so you can make the changes there as well.", "Nothing until you open the source file, when you are asked if you want to update it."], "c": 0, "e": ["Correct. An embedded object has no link to the source file, so the source file does not change.", "The source file is not changed when you edit an embedded object.", "The source file does not open automatically.", "You are not asked to update the source file."]}, {"id": 85, "d": "W", "q": "After editing sources using the Source Manager dialog box, which of the following should you do to ensure the bibliography reflects the changes?", "o": ["Right-click anywhere in the bibliography and then click Update Field on the shortcut menu.", "Inspect the document.", "Check the document for spelling and grammar errors.", "Check the document for accessibility."], "c": 0, "e": ["Correct. Right click the bibliography and choose Update Field so it shows the changes.", "Inspect Document looks for hidden information or personal data.", "Spelling and grammar does not update the bibliography.", "The accessibility check does not update the bibliography."]}, {"id": 86, "d": "P", "q": "When you edit the source file of a linked object on a slide, what happens to the linked object?", "o": ["Nothing because the linked object is not connected to the source file, only to the source program.", "The changes are made in both the source file and in the linked object.", "The changes are made in the source file, and then the file containing the linked object automatically opens so you can make the changes there as well.", "Nothing because if you want to edit a linked object, you need to edit it in the destination file."], "c": 1, "e": ["A linked object is connected to its source file, so it does change.", "Correct. A linked object updates when you change the source file.", "The linked object's file does not open automatically.", "You edit the linked object by editing the source file, not in the destination file."]}, {"id": 87, "d": "G", "q": "How do you combine table cells?", "o": ["Copy them.", "Split them.", "Merge them.", "Link them."], "c": 2, "e": ["Copying duplicates content. It does not combine cells.", "Splitting divides a cell into more cells.", "Correct. Merging combines table cells into one.", "Linking connects to another file. It does not combine cells."]}, {"id": 88, "d": "P", "q": "Mia wants the cells in a table on a slide to have a 3D effect. Which effect should she apply?", "o": ["Bevel", "Reflection", "Shadow", "Border"], "c": 0, "e": ["Correct. A bevel gives table cells a 3D effect.", "Reflection mirrors an object.", "Shadow creates a shadow behind an object.", "A border is a line around cells and is not 3D."]}, {"id": 89, "d": "G", "q": "Cameron needs to brighten and increase the contrast of a picture. He should do which of the following on the Picture Format tab?", "o": ["Click the Corrections button and select the desired option.", "Click the Color button and select the desired option.", "Click the Artistic Effects button and select the desired option.", "Click the Change Picture button and select the desired option."], "c": 0, "e": ["Correct. Corrections adjusts brightness and contrast.", "Color changes the color or tone of a picture.", "Artistic Effects applies styles such as paint strokes.", "Change Picture replaces the picture."]}, {"id": 90, "d": "P", "q": "When you drag a photo on a slide, what appears to help you position it?", "o": ["Gridlines", "Smart guides", "Arrows", "Rulers"], "c": 1, "e": ["Gridlines appear only if turned on, and they are not what appears as you drag.", "Correct. Smart guides appear as you drag to help you align the photo with other objects.", "Arrows are not displayed to help position a photo.", "Rulers are displayed only if turned on and do not appear as you drag."]}, {"id": 91, "d": "G", "q": "If you type the wrong character, which key can you press to remove the incorrect character?", "o": ["Spacebar", "Home", "Backspace", "End"], "c": 2, "e": ["The Spacebar inserts a space.", "Home moves the insertion point to the start of the line.", "Correct. Backspace deletes the character before the insertion point.", "End moves the insertion point to the end of the line."]}, {"id": 92, "d": "G", "q": "You want to make selected text appear thicker and darker than text with the regular font style. What should you do?", "o": ["Click the Italic button.", "Click the Font button.", "Click the Bold button.", "Click the Bullets button."], "c": 2, "e": ["Italic slants the text. It does not make it thicker.", "The Font button opens font settings but does not make text bold by itself.", "Correct. Bold makes text thicker and darker.", "Bullets adds bullet points to a list."]}, {"id": 93, "d": "W", "q": "Nathan is creating a document that needs to be accessible to people with visual impairment. He should do what to the pictures in the document?", "o": ["Reset the pictures.", "Add appropriate alt text to each of the pictures.", "Add an artistic effect to each of the pictures.", "Set the text wrapping of all pictures to In Front of Text."], "c": 1, "e": ["Resetting removes formatting changes. It does not help accessibility.", "Correct. Alt text describes a picture for people using screen readers.", "Artistic effects change the look of the picture and do not help accessibility.", "In Front of Text only changes wrapping."]}, {"id": 94, "d": "W", "q": "Baki needs each line after the first line in a paragraph to be indented. He should do which of the following?", "o": ["Create a left tab stop.", "Create a first line indent.", "Create a hanging indent.", "Create a right tab stop."], "c": 2, "e": ["A left tab stop aligns text at a position. It does not indent the lines after the first.", "A first line indent indents only the first line, which is the opposite.", "Correct. A hanging indent indents every line after the first.", "A right tab stop aligns text at the right."]}, {"id": 95, "d": "W", "q": "To add alt text to a table, which of the following should Reiner do after selecting the table?", "o": ["Right click the table, click Table Properties on the shortcut menu, and then and click the Alt Text tab in the Table Properties dialog box.", "Click the Alt Text button on the Table Tools Design tab.", "Right-click the table and click Alt Text on the shortcut menu.", "There is no way to add alt text to a table."], "c": 0, "e": ["Correct. Table Properties has an Alt Text tab where you enter the description. (Unverified answer.)", "There is no Alt Text button on the Table Design tab in the version the course describes.", "In the course version, the shortcut menu does not list Alt Text directly. Newer versions may.", "This is false. Tables can have alt text."], "u": 1}, {"id": 96, "d": "W", "q": "When a comment is no longer useful, you should do which of the following?", "o": ["Edit the comment.", "Delete the comment.", "Reply to the comment.", "Hide the comment."], "c": 1, "e": ["Editing changes the comment but does not remove it.", "Correct. Delete the comment once it is no longer useful.", "A reply adds to the discussion but keeps the comment.", "Hiding does not remove it."]}, {"id": 97, "d": "G", "q": "Liam wants to include a box in his column chart to identify the colors assigned to each data element. What is this box called?", "o": ["Trendline", "Axis titles", "Legend", "Data labels"], "c": 2, "e": ["A trendline shows the direction of data.", "Axis titles label the axes.", "Correct. A legend is the box that identifies the colors of each data element.", "Data labels show values on the chart."]}, {"id": 98, "d": "G", "q": "If you want to insert formatted decorative text and then change its text fill, outline, and shape, which of the following should you insert?", "o": ["Chart", "WordArt", "SmartArt", "Table"], "c": 1, "e": ["A chart displays data and is not decorative text.", "Correct. WordArt is formatted decorative text with text fill, outline, and shape options.", "SmartArt creates diagrams and lists.", "A table organizes data in rows and columns."]}, {"id": 99, "d": "P", "q": "When you enter title text in the Outline pane in Outline view, what happens on the slide?", "o": ["The text appears in the title placeholder on the slide.", "The text appears in the slide content area.", "Outline view returns to Normal view.", "A new slide is created."], "c": 0, "e": ["Correct. Text typed as a title in the Outline pane appears in the title placeholder.", "It does not go in the content area.", "Outline view does not switch to Normal view.", "A new slide is created when you press Enter, not simply by typing a title."]}, {"id": 100, "d": "W", "q": "In MLA format, the alphabetical list of bibliographic sources at the end of the paper is called which of the following?", "o": ["bibliography page", "works cited page", "references list page", "references cited page"], "c": 1, "e": ["In Word, bibliography is the name of the built in gallery option, but MLA calls the page Works Cited.", "Correct. In MLA format, the list of sources is called the Works Cited page.", "References list is used in other styles such as APA.", "References cited is not the MLA term."]}]</script>
+<script>
+(() => {
+"use strict";
+const QS = JSON.parse(document.getElementById("qdata").textContent);
+const QBYID = Object.fromEntries(QS.map(q => [q.id, q]));
+const GR = {
+  W:{name:"Word", blurb:"Documents, mail merge, citations, formatting"},
+  P:{name:"PowerPoint", blurb:"Slides, views, printing, animation"},
+  G:{name:"General", blurb:"Charts, tables, pictures, shapes, Excel"},
+};
+const GORDER = ["W","P","G"];
+const GCOUNT = {}; QS.forEach(q => GCOUNT[q.d] = (GCOUNT[q.d]||0)+1);
+const TARGET = 80, STREAK = 3;
+const $app = document.getElementById("app");
+document.getElementById("brandSub").textContent = QS.length + " practice questions, with an explanation for every answer choice";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pct = (a,b) => b ? Math.round(100*a/b) : 0;
+const cvar = d => `--c:var(--d${d})`;
+const LET = "ABCD";
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const isTF = q => /^(True|False)\.?$/.test(q.o[0]);
+
+/* ---------- storage ---------- */
+const LS_KEY = "bcis1305-sessions-v1", LS_SET = "bcis1305-settings-v1", LS_MB = "bcis1305-missbook-v1";
+function lsGet(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } }
+function lsSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+let sessions = lsGet(LS_KEY, {}) || {};
+let missbook = lsGet(LS_MB, {mastered:{}}) || {mastered:{}};
+if (!missbook.mastered) missbook.mastered = {};
+function saveSession(s){ sessions[s.id] = s; lsSet(LS_KEY, sessions); }
+function setGotIt(id, on){ missbook.mastered[id] = {on, at:Date.now()}; lsSet(LS_MB, missbook); }
+
+/* ---------- stats ---------- */
+function computeStats(){
+  const att = [];
+  for (const s of Object.values(sessions)) for (const a of (s.attempts||[])) if (QBYID[a.q]) att.push({...a, sid:s.id});
+  att.sort((x,y) => x.at - y.at);
+  const perQ = {}; att.forEach(a => (perQ[a.q] = perQ[a.q] || []).push(a));
+  const agg = () => ({n:0, ok:0, ms:0, list:[]});
+  const byD = {}; GORDER.forEach(d => byD[d] = agg());
+  att.forEach(a => { const g = byD[QBYID[a.q].d]; g.n++; g.ok += a.ok?1:0; g.ms += a.ms||0; g.list.push(a.ok?1:0); });
+  const recent = (list, n) => { const r = list.slice(-n); return r.length ? Math.round(100*r.reduce((x,y)=>x+y,0)/r.length) : null; };
+  const seenD = {}; GORDER.forEach(d => seenD[d] = 0);
+  Object.keys(perQ).forEach(id => seenD[QBYID[id].d]++);
+  const missInfo = {};
+  Object.entries(perQ).forEach(([id, l]) => {
+    const wrong = l.filter(a => !a.ok); if (!wrong.length) return;
+    const lastWrong = wrong[wrong.length-1];
+    const m = missbook.mastered[id];
+    const checked = !!(m && m.on && m.at > lastWrong.at);
+    const anchor = Math.max(lastWrong.at, (m && !m.on) ? m.at : 0);
+    const after = l.filter(a => a.at > anchor);
+    const streak = after.length, streakDone = streak >= STREAK;
+    const gotIt = checked || streakDone;
+    missInfo[id] = {misses:wrong.length, tries:l.length, lastWrong, last:l[l.length-1], gotIt, gotItAt: checked ? m.at : streakDone ? after[STREAK-1].at : null, streak, how: checked ? "checked" : streakDone ? "streak" : null};
+  });
+  const missedNow = Object.keys(missInfo).filter(id => !missInfo[id].gotIt);
+  const missSet = new Set(missedNow.map(Number));
+  const mastered = Object.keys(missInfo).filter(id => missInfo[id].gotIt);
+  const repeat = Object.entries(perQ).filter(([id,l]) => l.filter(a=>!a.ok).length >= 2).map(([id,l]) => ({id, miss:l.filter(a=>!a.ok).length, n:l.length}));
+  let wsum = 0, acc = 0, enough = true;
+  GORDER.forEach(d => { const r = recent(byD[d].list, 40); if (byD[d].n < 10) enough = false; if (r !== null) { acc += r * GCOUNT[d]; wsum += GCOUNT[d]; } });
+  return {att, perQ, byD, recent, seenD, missInfo, missedNow, missSet, mastered, repeat, readiness: wsum ? Math.round(acc/wsum) : null, enough};
+}
+function statusOf(n, p){
+  if (!n) return ["Not started","s-none"];
+  if (n < 5) return ["Too few answers","s-none"];
+  if (p >= 85) return ["Strong","s-ok"];
+  if (p >= 70) return ["Borderline","s-dev"];
+  return ["Needs work","s-weak"];
+}
+
+/* ---------- settings ---------- */
+let settings = Object.assign({groups:["W","P","G"], count:25, feedback:"instant", pool:"unseen", shuffleQ:true, shuffleO:true}, lsGet(LS_SET, {}));
+if (![5,10,25,QS.length].includes(settings.count)) settings.count = 25;
+function saveSettings(){ lsSet(LS_SET, settings); }
+const eligible = st => QS.filter(q => st.groups.includes(q.d));
+function buildSet(st){
+  const stats = computeStats();
+  let pool = eligible(st);
+  if (st.pool === "missed") pool = pool.filter(q => stats.missSet.has(q.id));
+  const n = Math.min(st.count, pool.length);
+  const score = q => {
+    const l = stats.perQ[q.id];
+    if (st.pool !== "unseen" || !l) return Math.random();
+    return 1 + (l[l.length-1].ok ? 2 : 0) + Math.random();
+  };
+  let pick = [];
+  const gs = [...new Set(pool.map(q => q.d))];
+  if (gs.length < 2) pick = pool.map(q => [score(q), q]).sort((a,b) => a[0]-b[0]).slice(0,n).map(x => x[1]);
+  else {
+    const wt = gs.reduce((s,d) => s + GCOUNT[d], 0), want = {}; let given = 0;
+    gs.forEach(d => { want[d] = Math.floor(n * GCOUNT[d] / wt); given += want[d]; });
+    const order = gs.slice().sort((a,b) => (n*GCOUNT[b]/wt % 1) - (n*GCOUNT[a]/wt % 1));
+    for (let i=0; given < n; i = (i+1) % order.length) { want[order[i]]++; given++; }
+    const left = [];
+    gs.forEach(d => {
+      const ranked = pool.filter(q => q.d === d).map(q => [score(q), q]).sort((a,b) => a[0]-b[0]).map(x => x[1]);
+      pick.push(...ranked.slice(0, want[d])); left.push(...ranked.slice(want[d]));
+    });
+    if (pick.length < n) pick.push(...left.slice(0, n - pick.length));
+  }
+  return st.shuffleQ ? shuffle(pick) : pick.sort((a,b) => a.id - b.id);
+}
+
+/* ---------- navigation ---------- */
+let view = "setup", run = null;
+document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => {
+  if (run && !run.done) finishRun(false);
+  go(b.dataset.view);
+}));
+function go(v){
+  view = v;
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-current", (b.dataset.view === v || ((v==="quiz"||v==="results") && b.dataset.view==="setup")) ? "page" : "false"));
+  render(); window.scrollTo(0,0);
+}
+function render(){
+  if (view === "setup") renderSetup();
+  else if (view === "quiz") renderQuiz();
+  else if (view === "results") renderResults();
+  else if (view === "progress") renderProgress();
+  else if (view === "missed") renderMissed();
+}
+
+/* ---------- setup ---------- */
+function renderSetup(){
+  const stats = computeStats();
+  const pool = eligible(settings);
+  const missedPool = pool.filter(q => stats.missSet.has(q.id));
+  const avail = settings.pool === "missed" ? missedPool.length : pool.length;
+  const unseen = pool.filter(q => !stats.perQ[q.id]).length;
+  const counts = [5,10,25,QS.length];
+  const total = stats.att.length;
+  $app.innerHTML = `
+    <h1>Start a practice set</h1>
+    <p class="muted">${total ? `You have answered ${total.toLocaleString()} questions and seen ${Object.keys(stats.perQ).length} of ${QS.length}.` : "Choose your topics, how many questions, and when you want to see explanations."}</p>
+    <div class="field">
+      <span class="lbl" id="grpLbl">Topics</span>
+      <div class="ribbon" role="group" aria-labelledby="grpLbl">
+        ${GORDER.map(d => { const on = settings.groups.includes(d), r = stats.byD[d];
+          return `<button class="seg" style="flex:${GCOUNT[d]};${cvar(d)}" data-grp="${d}" aria-pressed="${on}">
+            <span class="pct">${GCOUNT[d]}</span>
+            <span><span class="nm">${GR[d].name}</span><br><span class="sub">${r.n ? pct(r.ok,r.n)+"% correct" : GR[d].blurb}</span></span></button>`; }).join("")}
+      </div>
+      <div class="ribbon-note">The number on each block is how many questions it holds. Tap to include or leave out a topic. With more than one topic selected, your set follows the same proportions.</div>
+    </div>
+    <div class="field">
+      <span class="lbl">Number of questions</span>
+      <div class="choices">
+        ${counts.map(c => `<button class="chip" data-count="${c}" aria-pressed="${settings.count===c}">${c===QS.length ? "Full "+c : c}</button>`).join("")}
+      </div>
+    </div>
+    <div class="field">
+      <span class="lbl">When to show explanations</span>
+      <div class="choices">
+        <button class="chip" data-fb="instant" aria-pressed="${settings.feedback==="instant"}">After each question</button>
+        <button class="chip" data-fb="end" aria-pressed="${settings.feedback==="end"}">At the end of the set</button>
+      </div>
+    </div>
+    <div class="field">
+      <span class="lbl">Which questions</span>
+      <div class="choices">
+        <button class="chip" data-pool="unseen" aria-pressed="${settings.pool==="unseen"}">New questions first</button>
+        <button class="chip" data-pool="any" aria-pressed="${settings.pool==="any"}">Any question</button>
+        <button class="chip" data-pool="missed" aria-pressed="${settings.pool==="missed"}">My missed list (${missedPool.length})</button>
+      </div>
+      <div class="pool-note">${settings.pool==="unseen" ? `${unseen} unseen questions match your topics. After those, recent misses come next.` : settings.pool==="missed" ? "Every question you have missed, until you mark it \"I've got it\" or answer it correctly 3 times in a row." : "A random mix from the selected topics."}</div>
+    </div>
+    <div class="field">
+      <span class="lbl">Order</span>
+      <div class="choices">
+        <button class="chip" data-shq aria-pressed="${settings.shuffleQ}">Shuffle questions</button>
+        <button class="chip" data-sho aria-pressed="${settings.shuffleO}">Shuffle answer choices</button>
+      </div>
+    </div>
+    ${stats.missedNow.length ? `<div class="miss-card"><span class="n">${stats.missedNow.length}</span>
+      <div style="flex:1;min-width:200px"><strong>question${stats.missedNow.length===1?"":"s"} on your missed list</strong><div class="small muted">Uses your question count and explanation choice above, across all topics.</div></div>
+      <button class="btn ghost" id="missOnlyBtn">Quiz me on missed questions only</button></div>` : ""}
+    <div class="row" style="margin-top:30px">
+      <button class="btn" id="startBtn" ${avail && settings.groups.length ? "" : "disabled"}>Start ${Math.min(settings.count, avail)} questions</button>
+      <button class="btn ghost" id="examBtn">Take a full 100 question practice exam</button>
+      <span class="muted small">${!settings.groups.length ? "Pick at least one topic." : avail < settings.count ? `Only ${avail} questions match these choices.` : ""}</span>
+    </div>`;
+  $app.querySelectorAll("[data-grp]").forEach(b => b.onclick = () => { const d = b.dataset.grp; settings.groups = settings.groups.includes(d) ? settings.groups.filter(x => x!==d) : [...settings.groups, d]; saveSettings(); renderSetup(); });
+  $app.querySelectorAll("[data-count]").forEach(b => b.onclick = () => { settings.count = +b.dataset.count; saveSettings(); renderSetup(); });
+  $app.querySelectorAll("[data-fb]").forEach(b => b.onclick = () => { settings.feedback = b.dataset.fb; saveSettings(); renderSetup(); });
+  $app.querySelectorAll("[data-pool]").forEach(b => b.onclick = () => { settings.pool = b.dataset.pool; saveSettings(); renderSetup(); });
+  $app.querySelector("[data-shq]").onclick = () => { settings.shuffleQ = !settings.shuffleQ; saveSettings(); renderSetup(); };
+  $app.querySelector("[data-sho]").onclick = () => { settings.shuffleO = !settings.shuffleO; saveSettings(); renderSetup(); };
+  $app.querySelector("#startBtn").onclick = startRun;
+  $app.querySelector("#examBtn").onclick = () => { settings.groups = ["W","P","G"]; settings.count = QS.length; settings.feedback = "end"; settings.pool = "any"; saveSettings(); startRun(); };
+  const mo = $app.querySelector("#missOnlyBtn"); if (mo) mo.onclick = () => startMissedQuiz(["W","P","G"]);
+}
+function startMissedQuiz(groups){ settings.pool = "missed"; settings.groups = groups; saveSettings(); startRun(); }
+function newSess(set, extra){
+  const id = "s_" + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+  return {id, startedAt:Date.now(), endedAt:null, settings:{groups:settings.groups, count:set.length, feedback:settings.feedback, pool:settings.pool, ...extra}, attempts:[]};
+}
+function newRun(sess, set){
+  return {sess, set, i:0, order:set.map(q => (settings.shuffleO && !isTF(q)) ? shuffle([...q.o.keys()]) : [...q.o.keys()]), choice:null, answered:false, shownAt:Date.now(), done:false, confirmEnd:false};
+}
+function startRun(){
+  const set = buildSet(settings); if (!set.length) return;
+  run = newRun(newSess(set, {}), set); go("quiz");
+}
+
+/* ---------- explanations ---------- */
+function choiceBlock(q, oi, pos, chosen, showWhy){
+  const isC = oi === q.c;
+  let cls = "";
+  if (showWhy) cls = isC ? "correct" : (chosen === oi ? "wrong" : "");
+  else if (chosen === oi) cls = "sel";
+  const tag = isC ? (chosen === oi ? "Correct answer, and you chose it" : "Correct answer") : chosen === oi ? "Your answer is incorrect" : "Not the answer";
+  const txt = isC ? q.e[oi].replace(/^Correct\.\s*/, "") : q.e[oi];
+  return {cls, tag, txt};
+}
+function xallHTML(q, chosen, order){
+  const items = (order || [...q.o.keys()]).map((oi,pos) => {
+    const b = choiceBlock(q, oi, pos, chosen, true);
+    return `<div class="ch ${b.cls}"><div class="opt" style="cursor:default"><span class="key">${LET[pos]}</span><span>${esc(q.o[oi])}</span></div><div class="why"><span class="tag">${b.tag}</span>${esc(b.txt)}</div></div>`;
+  }).join("");
+  return `<details class="xall"><summary>Why each choice is right or wrong</summary><div class="opts">${items}</div></details>`;
+}
+function gotItHTML(id, st){
+  const info = st.missInfo[id]; if (!info) return "";
+  const done = info.gotIt;
+  return `<label class="gotit${done ? " done" : ""}"><input type="checkbox" data-gotit="${id}" ${done ? "checked" : ""}>
+    <span><strong>I've got it</strong> <span class="gotit-note">${done ? (info.how === "streak" ? "Cleared after 3 correct answers in a row. Uncheck to put it back." : "Removed from your missed list. Uncheck to put it back.") : "Check only when you are confident you will get this right going forward. Until then it stays on your missed list, unless you answer it correctly 3 times in a row."}</span></span></label>`;
+}
+document.addEventListener("change", e => {
+  const el = e.target; if (!el.matches || !el.matches("input[data-gotit]")) return;
+  setGotIt(el.dataset.gotit, el.checked);
+  const lab = el.closest(".gotit");
+  if (lab) { lab.classList.toggle("done", el.checked); lab.querySelector(".gotit-note").textContent = el.checked ? "Removed from your missed list. Uncheck to put it back." : "Check only when you are confident you will get this right going forward. Until then it stays on your missed list, unless you answer it correctly 3 times in a row."; }
+  if (view === "missed") setTimeout(renderMissed, 600);
+});
+
+/* ---------- quiz ---------- */
+function renderQuiz(){
+  if (!run) return go("setup");
+  const q = run.set[run.i], ord = run.order[run.i], n = run.set.length;
+  const instant = run.sess.settings.feedback === "instant";
+  const showWhy = run.answered && instant;
+  const ok = run.answered ? run.sess.attempts[run.sess.attempts.length-1].ok : null;
+  const choices = ord.map((oi,pos) => {
+    const b = choiceBlock(q, oi, pos, run.choice, showWhy);
+    return `<div class="ch ${b.cls}"><button class="opt" role="radio" data-oi="${oi}" aria-checked="${run.choice===oi}" ${run.answered?"disabled":""}><span class="key">${LET[pos]}</span><span>${esc(q.o[oi])}</span></button>${showWhy ? `<div class="why"><span class="tag">${b.tag}</span>${esc(b.txt)}</div>` : ""}</div>`;
+  }).join("");
+  $app.innerHTML = `
+    <div class="qhead">
+      <span class="dtag" style="${cvar(q.d)}">${GR[q.d].name}</span>${q.u ? `<span class="unv">Answer unverified</span>` : ""}
+      <span class="spacer"></span><span>Question ${run.i+1} of ${n}</span>
+    </div>
+    <div class="progress" aria-hidden="true"><i style="width:${100*(run.i + (run.answered?1:0))/n}%"></i></div>
+    <p class="stem" id="stem" tabindex="-1">${esc(q.q)}</p>
+    ${showWhy ? `<div class="verdict" style="--c:${ok ? "var(--ok)" : "var(--bad)"}" role="status"><strong>${ok ? "Correct." : "Not quite."}</strong> ${ok ? "" : "The correct answer is marked in green."} Every choice is explained below.</div>` : ""}
+    <div class="opts" role="radiogroup" aria-labelledby="stem">${choices}</div>
+    ${showWhy && q.u ? `<p class="unvnote">This answer is unverified. It comes from general Microsoft Office knowledge and has not been confirmed against the course materials, so double check it with your textbook or instructor.</p>` : ""}
+    ${showWhy ? gotItHTML(q.id, computeStats()) : ""}
+    <div class="row" style="margin-top:18px">
+      ${!run.answered ? `<button class="btn" id="submitBtn" ${run.choice===null?"disabled":""}>${instant ? "Check answer" : (run.i === n-1 ? "Finish set" : "Next question")}</button>`
+        : `<button class="btn" id="nextBtn">${run.i === n-1 ? "See results" : "Next question"}</button>`}
+      <span class="spacer"></span>
+      <button class="btn quiet" id="endBtn">End set early</button>
+    </div>
+    ${run.confirmEnd ? `<div class="card confirm"><p>End this set now? Answered questions are saved.</p><div class="row"><button class="btn" id="endYes">End set</button><button class="btn ghost" id="endNo">Keep going</button></div></div>` : ""}
+    <p class="kbd-hint">Keyboard: press A to D or 1 to 4 to choose, Enter to continue.</p>`;
+  $app.querySelectorAll(".opt[role=radio]").forEach(b => b.onclick = () => { if (run.answered) return; run.choice = +b.dataset.oi; renderQuiz(); });
+  const sb = $app.querySelector("#submitBtn"); if (sb) sb.onclick = submitAnswer;
+  const nb = $app.querySelector("#nextBtn"); if (nb) nb.onclick = nextQ;
+  $app.querySelector("#endBtn").onclick = () => { run.confirmEnd = true; renderQuiz(); };
+  const ey = $app.querySelector("#endYes"); if (ey) ey.onclick = () => finishRun(true);
+  const en = $app.querySelector("#endNo"); if (en) en.onclick = () => { run.confirmEnd = false; renderQuiz(); };
+}
+function submitAnswer(){
+  if (run.choice === null || run.answered) return;
+  const q = run.set[run.i];
+  run.sess.attempts.push({q:q.id, c:run.choice, ok:run.choice === q.c, ms:Math.min(Date.now()-run.shownAt, 600000), at:Date.now()});
+  saveSession(run.sess);
+  if (run.sess.settings.feedback === "instant") { run.answered = true; renderQuiz(); const el = document.querySelector(".verdict"); if (el) el.scrollIntoView({block:"nearest"}); }
+  else nextQ();
+}
+function nextQ(){
+  if (run.i >= run.set.length-1) return finishRun(true);
+  run.i++; run.choice = null; run.answered = false; run.confirmEnd = false; run.shownAt = Date.now();
+  renderQuiz(); window.scrollTo(0,0);
+  const s = document.getElementById("stem"); if (s) s.focus({preventScroll:true});
+}
+function finishRun(show){
+  run.done = true; run.sess.endedAt = Date.now();
+  if (run.sess.attempts.length) saveSession(run.sess); else { delete sessions[run.sess.id]; lsSet(LS_KEY, sessions); }
+  if (show) go("results");
+}
+document.addEventListener("keydown", e => {
+  if (view !== "quiz" || !run || e.target.tagName === "INPUT" || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  const idx = k.length === 1 && "abcd".indexOf(k) >= 0 ? "abcd".indexOf(k) : k.length === 1 ? "1234".indexOf(k) : -1;
+  if (idx >= 0 && !run.answered && run.order[run.i][idx] !== undefined) { run.choice = run.order[run.i][idx]; renderQuiz(); }
+  else if (e.key === "Enter") {
+    if (e.target.tagName === "BUTTON") return;
+    e.preventDefault();
+    if (!run.answered && run.choice !== null) submitAnswer(); else if (run.answered) nextQ();
+  }
+});
+
+/* ---------- results ---------- */
+function reviewItem(a, st, order){
+  const q = QBYID[a.q];
+  return `<div class="review-item" style="${cvar(q.d)}">
+    <div class="small muted">${GR[q.d].name}${q.u ? ' <span class="unv">Answer unverified</span>' : ""}</div>
+    <div class="q">${esc(q.q)}</div>
+    ${a.ok ? `<div class="ans" style="color:var(--ok)"><strong>Correct:</strong> ${esc(q.o[q.c])}</div>`
+      : `<div class="ans" style="color:var(--bad)"><strong>Your answer:</strong> ${esc(q.o[a.c])}</div><div class="ans" style="color:var(--ok)"><strong>Correct answer:</strong> ${esc(q.o[q.c])}</div>`}
+    ${xallHTML(q, a.c, order)}${st ? gotItHTML(q.id, st) : ""}</div>`;
+}
+function renderResults(){
+  if (!run) return go("setup");
+  const s = run.sess, at = s.attempts, ok = at.filter(a => a.ok).length;
+  const byD = {}; at.forEach(a => { const d = QBYID[a.q].d; byD[d] = byD[d] || {n:0, ok:0}; byD[d].n++; if (a.ok) byD[d].ok++; });
+  const misses = at.filter(a => !a.ok), hits = at.filter(a => a.ok);
+  const endMode = s.settings.feedback === "end";
+  const rst = computeStats();
+  const avgS = at.length ? Math.round(at.reduce((x,a) => x + a.ms, 0)/at.length/1000) : 0;
+  const orderFor = a => { const i = run.set.findIndex(q => q.id === a.q); return i >= 0 ? run.order[i] : null; };
+  $app.innerHTML = `
+    <h1>Set complete</h1>
+    <div class="hero-score"><span class="big">${pct(ok, at.length)}%</span><span class="muted">${ok} of ${at.length} correct, ${avgS} seconds per question on average</span></div>
+    <h2>By topic</h2>
+    <div class="dom-rows">${GORDER.filter(d => byD[d]).map(d => `<div class="dom-row" style="${cvar(d)}"><div class="top"><span class="dtag" style="${cvar(d)}">${GR[d].name}</span><span>${byD[d].ok} of ${byD[d].n}, ${pct(byD[d].ok, byD[d].n)}%</span></div>
+      <div class="bar"><i style="width:${pct(byD[d].ok, byD[d].n)}%"></i><span class="target" style="left:${TARGET}%" title="${TARGET}% target"></span></div></div>`).join("")}</div>
+    <div class="row" style="margin-top:26px">
+      <button class="btn" id="again">Start another set</button>
+      ${misses.length ? `<button class="btn ghost" id="retry">Retry the ${misses.length} I missed</button>` : ""}
+      ${rst.missedNow.length ? `<button class="btn ghost" id="missAll">Quiz me on my missed list (${rst.missedNow.length})</button>` : ""}
+      <button class="btn quiet" id="toProg">See full progress</button>
+    </div>
+    <h2>${misses.length ? `Review: ${misses.length} missed` : "No misses this set"}</h2>
+    ${misses.map(a => reviewItem(a, rst, orderFor(a))).join("")}
+    ${endMode && hits.length ? `<h2>Answered correctly</h2>${hits.map(a => reviewItem(a, rst, orderFor(a))).join("")}` : ""}`;
+  $app.querySelector("#again").onclick = () => { run = null; go("setup"); };
+  $app.querySelector("#toProg").onclick = () => { run = null; go("progress"); };
+  const ma = $app.querySelector("#missAll"); if (ma) ma.onclick = () => { run = null; startMissedQuiz(["W","P","G"]); };
+  const r = $app.querySelector("#retry");
+  if (r) r.onclick = () => { const set = shuffle(misses.map(a => QBYID[a.q])); run = newRun(newSess(set, {pool:"retry"}), set); go("quiz"); };
+}
+
+/* ---------- progress ---------- */
+function trendChart(att){
+  const W = 820, H = 240, pad = {l:40, r:12, t:12, b:28};
+  if (att.length < 10) return `<div class="empty">Answer at least 10 questions to see your accuracy trend.</div>`;
+  const win = Math.min(25, Math.max(5, Math.floor(att.length/4)));
+  const pts = []; let r = 0;
+  att.forEach((a,i) => { r += a.ok?1:0; if (i >= win) r -= att[i-win].ok?1:0; if (i >= win-1) pts.push([i+1, 100*r/win]); });
+  const step = Math.max(1, Math.floor(pts.length/300));
+  const P = pts.filter((_,i) => i % step === 0 || i === pts.length-1);
+  const x = v => pad.l + (W-pad.l-pad.r) * (v-1) / Math.max(1, att.length-1);
+  const y = v => pad.t + (H-pad.t-pad.b) * (1 - v/100);
+  const path = P.map((p,i) => (i?"L":"M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1)).join(" ");
+  const grid = [0,25,50,75,100].map(g => `<line x1="${pad.l}" x2="${W-pad.r}" y1="${y(g)}" y2="${y(g)}" stroke="var(--soft)"/><text x="${pad.l-8}" y="${y(g)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${g}%</text>`).join("");
+  let c = 0; const C = att.map((a,i) => { c += a.ok?1:0; return [i+1, 100*c/(i+1)]; }).filter((_,i,arr) => i % Math.max(1,Math.floor(arr.length/300)) === 0 || i === arr.length-1);
+  const cpath = C.map((p,i) => (i?"L":"M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1)).join(" ");
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Accuracy over time: rolling ${win} question accuracy and overall accuracy">
+    ${grid}<line x1="${pad.l}" x2="${W-pad.r}" y1="${y(TARGET)}" y2="${y(TARGET)}" stroke="var(--ink)" stroke-dasharray="4 4" opacity=".5"/>
+    <path d="${cpath}" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="${path}" fill="none" stroke="var(--action)" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="${pad.l}" y="${H-8}" font-size="11" fill="var(--muted)">Question 1</text><text x="${W-pad.r}" y="${H-8}" font-size="11" fill="var(--muted)" text-anchor="end">Question ${att.length}</text></svg>
+    <div class="legend"><span><i style="--c:var(--action)"></i>Rolling accuracy, last ${win} answers</span><span><i style="--c:var(--muted)"></i>Overall accuracy</span><span><i style="--c:var(--ink);opacity:.5"></i>${TARGET}% target</span></div>`;
+}
+function renderProgress(){
+  const st = computeStats(), att = st.att;
+  if (!att.length) {
+    $app.innerHTML = `<h1>Progress</h1><div class="empty"><h3>No answers yet</h3><p class="muted">Finish a practice set and this page will show your accuracy by topic, track your trend over time, and suggest where to focus.</p><button class="btn" id="go1">Start practicing</button></div>`;
+    $app.querySelector("#go1").onclick = () => go("setup"); return;
+  }
+  const ok = att.filter(a => a.ok).length, seen = Object.keys(st.perQ).length;
+  const avgS = Math.round(att.reduce((x,a) => x + (a.ms||0), 0)/att.length/1000);
+  const sessList = Object.values(sessions).filter(s => (s.attempts||[]).length).sort((a,b) => b.startedAt - a.startedAt);
+  const half = list => { if (list.length < 20) return null; const h = Math.floor(list.length/2); const a = list.slice(0,h), b = list.slice(h); return Math.round(100*b.reduce((x,y)=>x+y,0)/b.length - 100*a.reduce((x,y)=>x+y,0)/a.length); };
+  const below = GORDER.filter(d => st.byD[d].n >= 10 && st.recent(st.byD[d].list, 40) < TARGET);
+  const untouched = GORDER.filter(d => st.byD[d].n === 0);
+  const notes = [];
+  if (!st.enough) notes.push(`Your readiness estimate is still rough. Aim for at least 10 answers in every topic${untouched.length ? `; you have not started ${untouched.map(d => GR[d].name).join(" or ")}` : ""}.`);
+  if (below.length) notes.push(`Recent accuracy is below ${TARGET}% in ${below.map(d => `${GR[d].name} (${st.recent(st.byD[d].list,40)}%)`).join(", ")}.`);
+  if (st.repeat.length) notes.push(`${st.repeat.length} question${st.repeat.length>1?"s have":" has"} been missed two or more times. They are listed below and are worth reviewing until the reasoning feels automatic.`);
+  if (seen < QS.length) notes.push(`You have seen ${seen} of the ${QS.length} questions. The real midterm draws from this same pool, so aim to see them all.`);
+  const focus = GORDER.map(d => { const g = st.byD[d]; const r = st.recent(g.list, 40); return {d, g, r, pri: g.n ? (100 - r) * GCOUNT[d] : 50 * GCOUNT[d]}; }).sort((a,b) => b.pri - a.pri);
+  $app.innerHTML = `
+    <h1>Progress</h1>
+    <div class="hero-score" style="margin-top:14px"><span class="big">${st.readiness === null ? "n/a" : st.readiness + "%"}</span>
+      <span class="muted">Readiness, based on your last 40 answers in each topic and weighted by topic size.<br>This app uses ${TARGET}% as a study target.</span></div>
+    <div class="stats">
+      <div class="stat"><b>${att.length.toLocaleString()}</b><span>answers</span></div>
+      <div class="stat"><b>${pct(ok, att.length)}%</b><span>correct overall</span></div>
+      <div class="stat"><b>${seen}</b><span>of ${QS.length} questions seen</span></div>
+      <div class="stat"><b>${st.missedNow.length}</b><span>on your missed list</span></div>
+      <div class="stat"><b>${avgS}s</b><span>average per question</span></div>
+    </div>
+    ${notes.length ? `<div class="card"><h3>What the numbers say</h3>${notes.map(n => `<p class="small" style="margin:6px 0">${esc(n)}</p>`).join("")}</div>` : ""}
+    <h2>Where to focus</h2>
+    <p class="muted small">Topics ranked by how much they are likely to cost you: how often you miss them, weighted by how many questions they hold. A topic you have not tried counts as a risk.</p>
+    <ol class="plan">${focus.map(f => `<li><div><strong>${GR[f.d].name}</strong><div class="small muted">${f.g.n ? `${pct(f.g.ok, f.g.n)}% across ${f.g.n} answers, recent ${f.r}%` : "Not attempted yet"}. ${st.seenD[f.d]} of ${GCOUNT[f.d]} questions seen.</div></div>
+      <div class="act"><button class="btn ghost" data-drill="${f.d}" style="padding:7px 14px;font-size:14px">Practice ${GR[f.d].name}</button></div></li>`).join("")}</ol>
+    <h2>Accuracy over time</h2><div class="card">${trendChart(att)}</div>
+    <h2>By topic</h2>
+    <div class="dom-rows">${GORDER.map(d => { const g = st.byD[d]; const r = st.recent(g.list, 40); const ch = half(g.list); const [lab, cls] = statusOf(g.n, r);
+      return `<div class="dom-row" style="${cvar(d)}"><div class="top"><span class="dtag" style="${cvar(d)}">${GR[d].name} <span class="muted" style="font-weight:400">${GCOUNT[d]} questions</span></span>
+        <span>${g.n ? `${pct(g.ok,g.n)}% overall, recent ${r}%${ch !== null ? `, ${ch >= 0 ? "up" : "down"} ${Math.abs(ch)} pts vs earlier` : ""}` : "Not started"} <span class="status ${cls}">${lab}</span></span></div>
+        <div class="bar"><i style="width:${r||0}%"></i><span class="target" style="left:${TARGET}%"></span></div>
+        <div class="small muted" style="margin-top:4px">${st.seenD[d]} of ${GCOUNT[d]} questions seen, ${g.n} answers</div></div>`; }).join("")}</div>
+    <h2>Repeatedly missed</h2>
+    ${st.repeat.length ? `<div class="tablewrap"><table><thead><tr><th>Question</th><th>Topic</th><th class="num">Missed</th></tr></thead><tbody>${st.repeat.sort((a,b) => b.miss - a.miss).slice(0,25).map(r => { const q = QBYID[r.id]; return `<tr><td>${esc(q.q.length > 110 ? q.q.slice(0,107)+"..." : q.q)}</td><td>${GR[q.d].name}</td><td class="num">${r.miss} of ${r.n}</td></tr>`; }).join("")}</tbody></table></div>` : `<p class="muted">No question has been missed more than once.</p>`}
+    <h2>Session history</h2>
+    <div class="tablewrap"><table><thead><tr><th>Date</th><th>Topics</th><th class="num">Questions</th><th class="num">Score</th><th>Explanations</th></tr></thead><tbody>
+      ${sessList.slice(0,60).map(s => { const a = s.attempts, o = a.filter(x => x.ok).length; return `<tr><td>${new Date(s.startedAt).toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"})}</td>
+        <td>${s.settings.pool === "retry" ? "Retry of misses" : s.settings.groups.length === 3 ? "All three" : s.settings.groups.map(d => GR[d].name).join(", ")}</td>
+        <td class="num">${a.length}</td><td class="num">${pct(o, a.length)}%</td><td>${s.settings.feedback === "end" ? "End of set" : "Each question"}</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <h2>Your data</h2>
+    <p class="muted small">Your history lives only in this browser on this device. Export it if you want a copy.</p>
+    <div class="row"><button class="btn ghost" id="exportBtn">Export history</button><button class="btn quiet danger" id="resetBtn">Erase all history</button></div>`;
+  $app.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => { settings.groups = [b.dataset.drill]; settings.count = Math.min(15, GCOUNT[b.dataset.drill]); settings.pool = "unseen"; saveSettings(); go("setup"); });
+  $app.querySelector("#exportBtn").onclick = exportData;
+  const rb = $app.querySelector("#resetBtn");
+  rb.onclick = () => { if (!rb.dataset.sure) { rb.dataset.sure = "1"; rb.textContent = "Tap again to erase everything"; return; } sessions = {}; missbook = {mastered:{}}; lsSet(LS_KEY, sessions); lsSet(LS_MB, missbook); render(); };
+}
+function exportData(){
+  const st = computeStats();
+  const rows = [["date","question_number","topic","correct","seconds","question","your_answer","correct_answer"]];
+  st.att.forEach(a => { const q = QBYID[a.q]; rows.push([new Date(a.at).toISOString(), q.id, GR[q.d].name, a.ok ? "yes" : "no", Math.round((a.ms||0)/1000), q.q, q.o[a.c], q.o[q.c]]); });
+  const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const url = URL.createObjectURL(new Blob([csv], {type:"text/csv"}));
+  const a = document.createElement("a"); a.href = url; a.download = "bcis1305-review-history.csv"; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+/* ---------- missed ---------- */
+let missedFilter = "all";
+const fmtDate = ts => new Date(ts).toLocaleDateString([], {month:"short", day:"numeric"});
+function renderMissed(){
+  const st = computeStats();
+  const ids = st.missedNow.filter(id => missedFilter === "all" || QBYID[id].d === missedFilter)
+    .sort((x,y) => st.missInfo[y].misses - st.missInfo[x].misses || st.missInfo[y].lastWrong.at - st.missInfo[x].lastWrong.at);
+  const groups = missedFilter === "all" ? ["W","P","G"] : [missedFilter];
+  const card = id => {
+    const q = QBYID[id], m = st.missInfo[id], a = m.lastWrong;
+    const lastTxt = m.last.ok ? `answered correctly on ${fmtDate(m.last.at)}` : `missed on ${fmtDate(m.last.at)}`;
+    return `<div class="review-item" style="${cvar(q.d)}">
+      <div class="miss-meta">${GR[q.d].name}. Missed ${m.misses} of ${m.tries} tr${m.tries===1?"y":"ies"}; most recently ${lastTxt}. Correct in a row since last miss: ${m.streak} of ${STREAK}.${q.u ? ' <span class="unv">Answer unverified</span>' : ""}</div>
+      <div class="q">${esc(q.q)}</div>
+      <div class="ans" style="color:var(--bad)"><strong>Your last wrong answer:</strong> ${esc(q.o[a.c])}</div>
+      <div class="ans" style="color:var(--ok)"><strong>Correct answer:</strong> ${esc(q.o[q.c])}</div>
+      ${xallHTML(q, a.c)}${gotItHTML(id, st)}</div>`;
+  };
+  const mast = st.mastered.sort((x,y) => st.missInfo[y].gotItAt - st.missInfo[x].gotItAt);
+  $app.innerHTML = `
+    <h1>Missed questions</h1>
+    <p class="muted">Every question you have missed stays here, even after you answer it correctly. It leaves when you check <strong>I've got it</strong> or when you answer it correctly 3 times in a row. If you miss it again later, it comes back.</p>
+    <div class="row" style="margin:18px 0 8px"><div class="choices">
+      <button class="chip" data-mf="all" aria-pressed="${missedFilter==="all"}">All (${st.missedNow.length})</button>
+      ${GORDER.map(d => `<button class="chip" data-mf="${d}" aria-pressed="${missedFilter===d}">${GR[d].name} (${st.missedNow.filter(id => QBYID[id].d===d).length})</button>`).join("")}
+    </div></div>
+    ${ids.length ? `<div class="miss-card"><span class="n">${ids.length}</span>
+      <div style="flex:1;min-width:220px"><strong>Quiz on ${missedFilter === "all" ? "your missed list" : GR[missedFilter].name + " misses"}</strong>
+        <div class="row small" style="margin-top:8px;gap:8px"><span class="muted">Questions:</span>
+          ${[5,10,25].filter(n => n < ids.length).map(n => `<button class="chip" data-mc="${n}" aria-pressed="${settings.count===n}">${n}</button>`).join("")}
+          <button class="chip" data-mc="${ids.length}" aria-pressed="${settings.count>=ids.length || ![5,10,25].includes(settings.count)}">All ${ids.length}</button></div>
+        <div class="row small" style="margin-top:8px;gap:8px"><span class="muted">Explanations:</span>
+          <button class="chip" data-mfb="instant" aria-pressed="${settings.feedback==="instant"}">After each question</button>
+          <button class="chip" data-mfb="end" aria-pressed="${settings.feedback==="end"}">At the end</button></div></div>
+      <button class="btn" id="practiceMissed">Quiz me on missed questions only</button></div>` : ""}
+    ${ids.length ? ids.map(card).join("") : `<div class="empty">${st.att.length ? (st.mastered.length ? "Your missed list is empty. Everything you have missed is marked \"I've got it.\"" : "No misses yet.") : "Missed questions will collect here once you start practicing."}</div>`}
+    ${mast.length ? `<details class="mastered"><summary>Cleared from the list (${mast.length})</summary>
+      ${mast.map(id => { const q = QBYID[id]; return `<div class="mastered-row"><span>${esc(q.q.length > 120 ? q.q.slice(0,117)+"..." : q.q)} <span class="muted">(missed ${st.missInfo[id].misses}x, ${st.missInfo[id].how === "streak" ? "cleared by 3 in a row" : "marked"} ${fmtDate(st.missInfo[id].gotItAt)})</span></span><button class="linkbtn" data-putback="${id}">Put back</button></div>`; }).join("")}</details>` : ""}`;
+  $app.querySelectorAll("[data-mf]").forEach(b => b.onclick = () => { missedFilter = b.dataset.mf; renderMissed(); });
+  $app.querySelectorAll("[data-mc]").forEach(b => b.onclick = () => { settings.count = +b.dataset.mc; saveSettings(); renderMissed(); });
+  $app.querySelectorAll("[data-mfb]").forEach(b => b.onclick = () => { settings.feedback = b.dataset.mfb; saveSettings(); renderMissed(); });
+  $app.querySelectorAll("[data-putback]").forEach(b => b.onclick = () => { setGotIt(b.dataset.putback, false); renderMissed(); });
+  const pm = $app.querySelector("#practiceMissed"); if (pm) pm.onclick = () => startMissedQuiz(groups);
+}
+
+render();
+})();
+</script>
+</body>
+</html>
